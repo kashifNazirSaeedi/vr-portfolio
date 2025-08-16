@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kashif Nazir – Unity & VR Developer</title>
+  <meta name="description" content="Unity Game & VR Developer specializing in multiplayer (Photon), XR integrations, Meta Quest, and real-time streaming. Portfolio, projects, and experience." />
+  <meta name="theme-color" content="#0d1117" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d1117; --panel:#161b22; --muted:#9ba0a8; --txt:#e6edf3; --brand:#58a6ff; --brand2:#7ee787; --accent:#2ea043; --line:#30363d; --chip:#1f242c;
+      --radius:18px; --shadow:0 12px 40px rgba(0,0,0,.5);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;overflow-x:hidden;position:relative}
+    a{color:var(--brand);text-decoration:none;transition:.3s}
+    a:hover{color:#1f6feb}
+
+    /* Space-like atmosphere */
+    canvas#stars {position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;background:var(--bg)}
+    .orb{position:fixed;border-radius:50%;opacity:.25;z-index:-2;filter:blur(100px);animation:float 14s ease-in-out infinite alternate}
+    .orb.blue{width:320px;height:320px;background:#58a6ff;top:20%;left:-10%}
+    .orb.green{width:260px;height:260px;background:#2ea043;bottom:10%;right:-8%}
+    @keyframes float{from{transform:translateY(0) translateX(0)}to{transform:translateY(-50px) translateX(40px)}}
+
+    .container{max-width:1100px;margin:0 auto;padding:0 22px}
+    header.hero{padding:120px 0 70px;text-align:left}
+    .hero .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    h1{font-size:3rem;font-family:Poppins,sans-serif;font-weight:700;color:#fff;text-shadow:0 3px 8px rgba(0,0,0,.35)}
+    .subtitle{font-size:1.2rem;color:var(--muted);max-width:600px;margin-top:10px}
+    .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:14px;font-weight:600;background:var(--chip);border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .25s ease, background .25s ease}
+    .btn:hover{transform:translateY(-4px) scale(1.02)}
+    .btn.primary{background:var(--brand);color:#fff}
+    .btn.primary:hover{background:#1f6feb}
+    .btn.ghost{background:transparent;color:var(--brand)}
+
+    nav.top{position:sticky;top:0;z-index:100;backdrop-filter:saturate(160%) blur(12px);background:rgba(13,17,23,.85);border-bottom:1px solid var(--line)}
+    nav.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .navlinks{display:flex;gap:20px}
+    .navlinks a{padding:10px 14px;border-radius:12px;color:var(--muted);font-weight:600;transition:.25s}
+    .navlinks a.active,.navlinks a:hover{color:#fff;background:rgba(88,166,255,.15)}
+
+    section{padding:80px 0;border-top:1px solid var(--line);position:relative;z-index:1}
+    h2{font-size:1.9rem;font-family:Poppins,sans-serif;font-weight:600;color:var(--brand);margin:0 0 28px;position:relative}
+    h2::after{content:"";display:block;width:50px;height:3px;background:var(--brand2);margin-top:6px;border-radius:3px}
+
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:.3s;overflow:hidden}
+    .card:hover{transform:translateY(-4px)}
+
+    .chips{display:flex;flex-wrap:wrap;gap:12px}
+    .chip{padding:9px 16px;font-size:.9rem;font-weight:600;background:var(--chip);border:1px solid var(--line);border-radius:999px;color:#d0d7de;transition:.25s}
+    .chip:hover{background:rgba(88,166,255,.25)}
+
+    .timeline{display:grid;gap:28px}
+    .job{background:linear-gradient(145deg,rgba(88,166,255,.06),transparent),var(--panel);border:1px solid var(--line);padding:22px;border-radius:var(--radius);transition:.3s}
+    .job:hover{transform:translateY(-3px) scale(1.01)}
+    .job h3{margin:0;font-size:1.25rem;color:#fff}
+    .meta{color:var(--muted);font-size:.95rem;margin-top:4px}
+
+    .projects.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+    .project{background:linear-gradient(160deg,rgba(126,231,135,.07),transparent),var(--panel);border:1px solid var(--line);padding:22px;border-radius:var(--radius);box-shadow:var(--shadow);transition:.3s;position:relative;overflow:hidden}
+    .project img{width:100%;border-radius:var(--radius);margin-bottom:12px}
+    .project h4{margin:0;font-family:Poppins,sans-serif;font-weight:600;color:var(--brand2)}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+
+    footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+    .cv-fab{position:fixed;right:20px;bottom:20px;z-index:200}
+
+    .socials{display:flex;gap:16px;margin-top:14px}
+    .socials a img{width:28px;height:28px;filter:brightness(0) invert(1);transition:.25s}
+    .socials a img:hover{filter:brightness(1) invert(0.1)}
+
+    @media(max-width:900px){.hero .inner{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="orb blue"></div>
+  <div class="orb green"></div>
+
+  <nav class="top">
+    <div class="container wrap">
+      <div style="font-weight:700;color:#fff">Kashif Nazir</div>
+      <div class="navlinks">
+        <a href="#about" class="active">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container inner">
+      <div>
+        <h1>Kashif Nazir</h1>
+        <p class="subtitle">Unity Game & VR Developer — Expert in Multiplayer (Photon, Netcode), XR (Meta Quest), and real-time streaming for immersive gameplay.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">🚀 View Projects</a>
+          <a class="btn" href="#contact">📬 Contact</a>
+          <a class="btn ghost" href="Kashif_Nazir_Updated_CV.pdf" download>📄 Download CV</a>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
+          <a href="mailto:kashifnazirsaeedi@gmail.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Email"></a>
+          <a href="tel:+923044145248"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"></a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Highlights</h3>
+        <ul style="margin:0 0 0 20px">
+          <li>Optimized VR sports gameplay (CricVRX) for Meta Quest.</li>
+          <li>Engineered Android TV ⇄ Quest real-time streaming via UDP.</li>
+          <li>Built multiplayer VR setups with Photon for smooth play.</li>
+          <li>Reusable VR interaction frameworks for rapid prototyping.</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2>About</h2>
+      <div class="card">
+        <p>Unity & VR Developer with proven expertise in multiplayer, XR integrations, and optimized game mechanics. Strong in end-to-end development, team collaboration, and shipping polished experiences on Meta Quest and mobile platforms.</p>
+        <p><strong>Location:</strong> Lahore, Pakistan · <strong>Open to:</strong> Remote, Contract, Full-time</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="card chips">
+        <span class="chip">Unity</span><span class="chip">C#</span><span class="chip">VR / XR</span><span class="chip">Meta Quest</span>
+        <span class="chip">Multiplayer</span><span class="chip">Photon</span><span class="chip">Netcode</span><span class="chip">Gameplay Physics</span>
+        <span class="chip">Interaction Systems</span><span class="chip">Android TV</span><span class="chip">UDP Streaming</span>
+        <span class="chip">Cesium 3D Maps</span><span class="chip">AdMob</span><span class="chip">IronSource</span>
+        <span class="chip">Firebase Remote Config</span><span class="chip">Mixed Reality</span><span class="chip">Cross-platform</span>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="job">
+          <h3>Software Engineer (VR Game Developer) · Abstron</h3>
+          <div class="meta">Mar 2023 – Present · Lahore</div>
+          <ul>
+            <li>Developed CricVRX with optimized physics & controls.</li>
+            <li>Integrated Android TV to Quest streaming via UDP.</li>
+            <li>Photon-powered multiplayer VR systems.</li>
+            <li>Reusable VR interactions for rapid iteration.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <h3>VR Game Developer · Cherry Byte Technologies</h3>
+          <div class="meta">Mar 2022 – Feb 2023 · Lahore</div>
+          <ul>
+            <li>Built mixed-reality XR experiences and Snapchat AR filters.</li>
+            <li>Cesium 3D VR world exploration with dynamic vehicle systems.</li>
+            <li>Monetization integrations with AdMob, IronSource, Firebase RC.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <h3>Game Developer · DevOps Studio Pvt Ltd</h3>
+          <div class="meta">Dec 2021 – Feb 2023 · Lahore</div>
+          <ul>
+            <li>Developed 5+ 3D simulation games from scratch.</li>
+            <li>Gameplay design, level design, RPG mechanics.</li>
+            <li>Monetization integrations across multiple titles.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div class="projects grid">
+        <div class="project">
+          <img src="https://i.imgur.com/cVtFZ7X.png" alt="World Tour VR">
+          <h4><a href="https://sidequestvr.com/app/31802/world-tour-flying-on-real-3d-maps" target="_blank">World Tour VR</a></h4>
+          <p>Explore real-world 3D maps in VR with helicopters, carpets, balloons.</p>
+        </div>
+        <div class="project">
+          <img src="https://i.imgur.com/Z3dFX8t.png" alt="PunchVRX">
+          <h4><a href="https://sidequestvr.com/app/10408/punchvrx-boxing-game" target="_blank">PunchVRX Boxing VR</a></h4>
+          <p>Multiplayer & AI boxing with training and fight modes.</p>
+        </div>
+        <div class="project">
+          <img src="https://i.imgur.com/zoc2p2W.png" alt="Ninja Fight VR">
+          <h4><a href="https://sidequestvr.com/app/35160/samurai-ninja-clash-fighting-game" target="_blank">Ninja Fight VR</a></h4>
+          <p>Multiplayer & AI ninja combat with Training, Survival, Fruit Slice.</p>
+        </div>
+        <div class="project">
+          <img src="https://i.imgur.com/04fQzqF.png" alt="Thunder of Gladiator XR">
+          <h4><a href="https://sidequestvr.com/app/10437/thunder-gladiator-fighting-game" target="_blank">Thunder of Gladiator XR</a></h4>
+          <p>Mixed-Reality sword fighting blending real and virtual.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="split">
+        <div class="card">
+          <p><strong>Email:</strong> <a href="mailto:kashifnazirsaeedi@gmail.com" id="email">kashifnazirsaeedi@gmail.com</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank">linkedin.com/in/kashifnazir2</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+923044145248">+92 304 4145248</a></p>
+          <p><strong>Location:</strong> Lahore, Pakistan</p>
+        </div>
+        <form class="card" action="mailto:kashifnazirsaeedi@gmail.com" method="post" enctype="text/plain">
+          <h3 style="margin-top:0">Quick Message</h3>
+          <input name="name" placeholder="Your name" required style="width:100%;padding:10px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:var(--chip);color:var(--txt)">
+          <textarea name="message" rows="4" placeholder="Your message" required style="width:100%;padding:10px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:var(--chip);color:var(--txt)"></textarea>
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Kashif Nazir · All Rights Reserved</div>
+  </footer>
+
+  <div class="cv-fab">
+    <a class="btn primary" href="Kashif_Nazir_Updated_CV.pdf" download>📄 CV</a>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent=new Date().getFullYear();
+   
