@@ -61,7 +61,6 @@
 
     .projects.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
     .project{background:linear-gradient(160deg,rgba(126,231,135,.07),transparent),var(--panel);border:1px solid var(--line);padding:22px;border-radius:var(--radius);box-shadow:var(--shadow);transition:.3s;position:relative;overflow:hidden}
-    .project img{width:100%;border-radius:var(--radius);margin-bottom:12px}
     .project h4{margin:0;font-family:Poppins,sans-serif;font-weight:600;color:var(--brand2)}
 
     .split{display:grid;grid-template-columns:1fr 1fr;gap:26px}
@@ -181,22 +180,18 @@
       <h2>Featured Projects</h2>
       <div class="projects grid">
         <div class="project">
-          <img src="https://i.imgur.com/cVtFZ7X.png" alt="World Tour VR">
           <h4><a href="https://sidequestvr.com/app/31802/world-tour-flying-on-real-3d-maps" target="_blank">World Tour VR</a></h4>
           <p>Explore real-world 3D maps in VR with helicopters, carpets, balloons.</p>
         </div>
         <div class="project">
-          <img src="https://i.imgur.com/Z3dFX8t.png" alt="PunchVRX">
           <h4><a href="https://sidequestvr.com/app/10408/punchvrx-boxing-game" target="_blank">PunchVRX Boxing VR</a></h4>
           <p>Multiplayer & AI boxing with training and fight modes.</p>
         </div>
         <div class="project">
-          <img src="https://i.imgur.com/zoc2p2W.png" alt="Ninja Fight VR">
           <h4><a href="https://sidequestvr.com/app/35160/samurai-ninja-clash-fighting-game" target="_blank">Ninja Fight VR</a></h4>
           <p>Multiplayer & AI ninja combat with Training, Survival, Fruit Slice.</p>
         </div>
         <div class="project">
-          <img src="https://i.imgur.com/04fQzqF.png" alt="Thunder of Gladiator XR">
           <h4><a href="https://sidequestvr.com/app/10437/thunder-gladiator-fighting-game" target="_blank">Thunder of Gladiator XR</a></h4>
           <p>Mixed-Reality sword fighting blending real and virtual.</p>
         </div>
@@ -231,5 +226,62 @@
   </div>
 
   <script>
-    document.getElementById('year').textContent=new Date().getFullYear();
-   
+  document.getElementById('year').textContent=new Date().getFullYear();
+  
+  // Stars background
+  const canvas=document.getElementById('stars');
+  const ctx=canvas.getContext('2d');
+  let w,h,stars=[];
+  
+  function resize(){
+    w=canvas.width=window.innerWidth;
+    h=canvas.height=window.innerHeight;
+  }
+  window.onresize=resize;
+  resize();
+
+  function init(){
+    stars=[];
+    for(let i=0;i<200;i++){
+      stars.push({
+        x:Math.random()*w,
+        y:Math.random()*h,
+        r:Math.random()*1.5+0.5,  // star radius
+        d:Math.random()*0.5+0.2,  // fall speed
+        alpha:Math.random(),      // transparency
+        fade:Math.random()*0.02+0.005 // how fast it twinkles
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(let i=0;i<stars.length;i++){
+      let s=stars[i];
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${s.alpha})`;
+      ctx.fill();
+    }
+    update();
+  }
+
+  function update(){
+    for(let i=0;i<stars.length;i++){
+      let s=stars[i];
+      // star movement
+      s.y+=s.d;
+      if(s.y>h){
+        stars[i]={x:Math.random()*w,y:0,r:s.r,d:s.d,alpha:Math.random(),fade:s.fade};
+      }
+      // twinkling effect
+      s.alpha+=s.fade;
+      if(s.alpha<=0 || s.alpha>=1){
+        s.fade*=-1; // reverse fade direction
+      }
+    }
+  }
+
+  init();
+  setInterval(draw,33); // ~30 FPS
+</script>
