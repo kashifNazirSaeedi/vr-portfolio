@@ -1,287 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kashif Nazir – Unity & VR Developer</title>
-  <meta name="description" content="Unity Game & VR Developer specializing in multiplayer (Photon), XR integrations, Meta Quest, and real-time streaming. Portfolio, projects, and experience." />
-  <meta name="theme-color" content="#0d1117" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Unity Game & VR Developer focused on Multiplayer (Photon), XR (Meta Quest), and real-time streaming. Portfolio, projects, and experience." />
+  <meta name="theme-color" content="#6c5ce7" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{
-      --bg:#0d1117; --panel:#161b22; --muted:#9ba0a8; --txt:#e6edf3; --brand:#58a6ff; --brand2:#7ee787; --accent:#2ea043; --line:#30363d; --chip:#1f242c;
-      --radius:18px; --shadow:0 12px 40px rgba(0,0,0,.5);
+    :root {
+      --bg: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-2: rgba(255, 255, 255, 0.12);
+      --txt: rgba(255, 255, 255, 0.9);
+      --muted: rgba(255, 255, 255, 0.7);
+      --brand: #6c5ce7;
+      --brand2: #00cec9;
+      --accent: #fd79a8;
+      --line: rgba(255, 255, 255, 0.1);
+      --chip: rgba(255, 255, 255, 0.1);
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --glow: 0 0 25px rgba(108, 92, 231, 0.5);
+      --text-glow: 0 0 10px rgba(108, 92, 231, 0.7);
+      --transition: cubic-bezier(0.16, 1, 0.3, 1);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;overflow-x:hidden;position:relative}
-    a{color:var(--brand);text-decoration:none;transition:.3s}
-    a:hover{color:#1f6feb}
 
-    /* Space-like atmosphere */
-    canvas#stars {position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;background:var(--bg)}
-    .orb{position:fixed;border-radius:50%;opacity:.25;z-index:-2;filter:blur(100px);animation:float 14s ease-in-out infinite alternate}
-    .orb.blue{width:320px;height:320px;background:#58a6ff;top:20%;left:-10%}
-    .orb.green{width:260px;height:260px;background:#2ea043;bottom:10%;right:-8%}
-    @keyframes float{from{transform:translateY(0) translateX(0)}to{transform:translateY(-50px) translateX(40px)}}
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html, body { height: 100%; scroll-behavior: smooth }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      background-attachment: fixed;
+      color: var(--txt);
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: white; }
+    a { color: var(--brand2); text-decoration: none; transition: all 0.4s var(--transition) }
+    a:hover { color: white; text-shadow: var(--text-glow) }
 
-    .container{max-width:1100px;margin:0 auto;padding:0 22px}
-    header.hero{padding:120px 0 70px;text-align:left}
-    .hero .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-    h1{font-size:3rem;font-family:Poppins,sans-serif;font-weight:700;color:#fff;text-shadow:0 3px 8px rgba(0,0,0,.35)}
-    .subtitle{font-size:1.2rem;color:var(--muted);max-width:600px;margin-top:10px}
-    .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:14px;font-weight:600;background:var(--chip);border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .25s ease, background .25s ease}
-    .btn:hover{transform:translateY(-4px) scale(1.02)}
-    .btn.primary{background:var(--brand);color:#fff}
-    .btn.primary:hover{background:#1f6feb}
-    .btn.ghost{background:transparent;color:var(--brand)}
+    /* Particles */
+    .particles {
+      position: fixed; inset: 0;
+      z-index: -1; overflow: hidden; perspective: 1000px;
+    }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: linear-gradient(145deg, rgba(108,92,231,.2), rgba(0,206,201,.1));
+      box-shadow: 0 0 20px rgba(108,92,231,.3);
+      animation: float 15s infinite ease-in-out;
+      transform-style: preserve-3d; will-change: transform;
+      opacity: 0; transition: opacity 1.5s ease;
+    }
+    .particle:nth-child(odd){
+      background: linear-gradient(145deg, rgba(253,121,168,.15), rgba(0,206,201,.1));
+    }
+    @keyframes float{
+      0%,100%{ transform: translate3d(0,0,0) rotate(0) scale(1)}
+      25%{ transform: translate3d(20px,30px,30px) rotate(90deg) scale(1.1)}
+      50%{ transform: translate3d(-30px,20px,40px) rotate(180deg) scale(.9)}
+      75%{ transform: translate3d(10px,-20px,20px) rotate(270deg) scale(1.05)}
+    }
 
-    nav.top{position:sticky;top:0;z-index:100;backdrop-filter:saturate(160%) blur(12px);background:rgba(13,17,23,.85);border-bottom:1px solid var(--line)}
-    nav.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .navlinks{display:flex;gap:20px}
-    .navlinks a{padding:10px 14px;border-radius:12px;color:var(--muted);font-weight:600;transition:.25s}
-    .navlinks a.active,.navlinks a:hover{color:#fff;background:rgba(88,166,255,.15)}
+    /* Navbar */
+    .nav{ position: sticky; top:0; z-index:100; backdrop-filter: blur(12px);
+      background: rgba(15,12,41,.7); border-bottom:1px solid var(--line);
+      box-shadow: 0 4px 30px rgba(0,0,0,.3); transform: translateY(-100%);
+      animation: slideDown .8s var(--transition) .3s forwards;
+    }
+    @keyframes slideDown{ to{ transform: translateY(0)} }
+    .nav .wrap{ max-width:1200px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between }
+    .brand{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; letter-spacing:1px;
+      background: linear-gradient(90deg,var(--brand),var(--brand2));
+      -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:var(--text-glow);
+      transition: all .4s var(--transition);
+    }
+    .brand:hover{ transform: scale(1.05); text-shadow:0 0 15px rgba(108,92,231,.8) }
+    .links{ display:flex; gap:16px }
+    .links a{ padding:8px 16px; border-radius:var(--radius); color:var(--txt); font-weight:500; font-size:.95rem; transition:all .4s var(--transition); transform-style: preserve-3d }
+    .links a:hover{ color:white; background: rgba(108,92,231,.2); text-shadow:var(--text-glow); transform: translateY(-2px) translateZ(10px); box-shadow:0 5px 15px rgba(108,92,231,.3)}
+    .menu-btn{ display:none; background:none; border:none; color:var(--txt); font-size:1.5rem; cursor:pointer; transition:all .4s var(--transition); transform-style: preserve-3d }
+    .menu-btn:hover{ color:var(--brand2); transform: rotate(90deg) translateZ(10px) }
 
-    section{padding:80px 0;border-top:1px solid var(--line);position:relative;z-index:1}
-    h2{font-size:1.9rem;font-family:Poppins,sans-serif;font-weight:600;color:var(--brand);margin:0 0 28px;position:relative}
-    h2::after{content:"";display:block;width:50px;height:3px;background:var(--brand2);margin-top:6px;border-radius:3px}
+    /* Hero */
+    .hero{ padding:120px 0 80px; position:relative; overflow:hidden }
+    .container{ max-width:1200px; margin:0 auto; padding:0 24px }
+    .hero .inner{ display:grid; grid-template-columns: 1.2fr .8fr; gap:40px; align-items:center }
+    h1{ font-size:3.5rem; line-height:1.2; margin-bottom:20px; background: linear-gradient(90deg, #fff, var(--brand2));
+      -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:var(--text-glow);
+      perspective:1000px; transform-style: preserve-3d; animation: titleFloat 6s infinite ease-in-out, fadeInUp 1s var(--transition) both;
+    }
+    @keyframes titleFloat{
+      0%,100%{ transform: translate3d(0,0,0) rotateX(0) rotateY(0)}
+      25%{ transform: translate3d(0,-8px,15px) rotateX(3deg) rotateY(3deg)}
+      50%{ transform: translate3d(0,-12px,25px) rotateX(5deg) rotateY(5deg)}
+      75%{ transform: translate3d(0,-8px,15px) rotateX(3deg) rotateY(-3deg)}
+    }
+    @keyframes fadeInUp{ from{ opacity:0; transform: translateY(30px)} to{ opacity:1; transform: translateY(0)} }
+    .subtitle{ color:var(--muted); font-size:1.2rem; max-width:600px; margin-bottom:30px; animation: fadeIn 1s var(--transition) .2s both }
+    @keyframes fadeIn{ from{ opacity:0} to{ opacity:1} }
+    .cta{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:30px; animation: fadeIn 1s var(--transition) .4s both }
+    .btn{ display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:var(--radius); font-weight:600;
+      transition: all .4s var(--transition); border:1px solid transparent; transform-style: preserve-3d; position:relative; overflow:hidden; will-change: transform;
+    }
+    .btn::before{ content:''; position:absolute; inset:0; background: linear-gradient(45deg, transparent, rgba(255,255,255,.15), transparent);
+      transform: translateX(-100%); transition: transform .8s ease;
+    }
+    .btn:hover::before{ transform: translateX(100%) }
+    .btn:hover{ transform: translateY(-5px) scale(1.03) translateZ(10px); box-shadow: var(--glow) }
+    .btn.primary{ background: linear-gradient(45deg, var(--brand), var(--brand2)); color:#fff; box-shadow:0 4px 15px rgba(108,92,231,.4) }
+    .btn.secondary{ background: var(--panel-2); color:var(--txt); border:1px solid var(--line) }
+    .btn.ghost{ background: transparent; color:var(--txt); border:1px solid var(--line) }
 
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:.3s;overflow:hidden}
-    .card:hover{transform:translateY(-4px)}
+    /* Cards / Sections */
+    .card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow);
+      transition: all .6s var(--transition); backdrop-filter: blur(8px); transform-style: preserve-3d; perspective:1000px; will-change: transform;
+      opacity:0; transform: translateY(30px) rotateX(15deg);
+    }
+    .card.animated{ opacity:1; transform: translateY(0) rotateX(0) }
+    .card:hover{ transform: translateY(-10px) rotateX(5deg) rotateY(5deg) translateZ(10px); box-shadow: var(--glow), 0 20px 25px -5px rgba(0,0,0,.3); background: rgba(108,92,231,.1) }
+    .floating{ animation: float 6s ease-in-out infinite }
+    section{ padding:100px 0; position:relative }
+    h2{ font-size:2.5rem; margin-bottom:40px; position:relative; display:inline-block; opacity:0; transform: translateY(20px); transition: all .8s var(--transition) }
+    h2.animated{ opacity:1; transform: translateY(0) }
+    h2:after{ content:''; position:absolute; bottom:-15px; left:0; width:80px; height:4px; background: linear-gradient(90deg, var(--brand), var(--brand2));
+      border-radius:2px; box-shadow:0 0 15px rgba(108,92,231,.7); transform-origin:left; transform: scaleX(0); transition: transform .8s var(--transition) .3s
+    }
+    h2.animated:after{ transform: scaleX(1) }
+    .sub{ color:var(--muted); margin-bottom:20px; font-size:1rem }
 
-    .chips{display:flex;flex-wrap:wrap;gap:12px}
-    .chip{padding:9px 16px;font-size:.9rem;font-weight:600;background:var(--chip);border:1px solid var(--line);border-radius:999px;color:#d0d7de;transition:.25s}
-    .chip:hover{background:rgba(88,166,255,.25)}
+    /* Chips */
+    .chips{ display:flex; gap:12px; flex-wrap:wrap }
+    .chip{ padding:10px 18px; border-radius:999px; background:var(--chip); color:var(--txt); font-weight:500; font-size:.9rem; border:1px solid var(--line);
+      transition: all .4s var(--transition); backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(20px) scale(.9)
+    }
+    .chip.animated{ opacity:1; transform: translateY(0) scale(1) }
+    .chip:hover{ background: rgba(108,92,231,.2); transform: translateY(-5px) scale(1.05) translateZ(5px); box-shadow:0 5px 15px rgba(108,92,231,.3) }
 
-    .timeline{display:grid;gap:28px}
-    .job{background:linear-gradient(145deg,rgba(88,166,255,.06),transparent),var(--panel);border:1px solid var(--line);padding:22px;border-radius:var(--radius);transition:.3s}
-    .job:hover{transform:translateY(-3px) scale(1.01)}
-    .job h3{margin:0;font-size:1.25rem;color:#fff}
-    .meta{color:var(--muted);font-size:.95rem;margin-top:4px}
+    /* Timeline */
+    .timeline{ display:grid; gap:24px }
+    .job{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition: all .6s var(--transition);
+      position:relative; overflow:hidden; backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(30px)
+    }
+    .job.animated{ opacity:1; transform: translateY(0) }
+    .job:hover{ transform: translateY(-10px) rotateX(2deg) translateZ(10px); box-shadow: var(--glow) }
+    .job:before{ content:''; position:absolute; top:0; left:0; width:4px; height:100%; background: linear-gradient(to bottom, var(--brand), var(--brand2));
+      box-shadow:0 0 10px rgba(108,92,231,.7); transform: scaleY(0); transform-origin: top; transition: transform .8s var(--transition) .3s
+    }
+    .job.animated:before{ transform: scaleY(1) }
+    .job h3{ font-size:1.3rem; margin-bottom:10px }
+    .meta{ color:var(--muted); font-size:1rem; margin-bottom:16px; display:flex; align-items:center; gap:8px }
+    .meta i{ font-size:.9rem }
+    .job ul{ margin-left:20px }
+    .job li{ margin-bottom:10px; position:relative; opacity:0; transform: translateX(-10px); transition: all .4s ease }
+    .job.animated li{ opacity:1; transform: translateX(0) }
+    .job li:nth-child(1){ transition-delay:.4s } .job li:nth-child(2){ transition-delay:.5s } .job li:nth-child(3){ transition-delay:.6s } .job li:nth-child(4){ transition-delay:.7s }
+    .job li:before{ content:'▹'; position:absolute; left:-20px; color:var(--brand2) }
 
-    .projects.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
-    .project{background:linear-gradient(160deg,rgba(126,231,135,.07),transparent),var(--panel);border:1px solid var(--line);padding:22px;border-radius:var(--radius);box-shadow:var(--shadow);transition:.3s;position:relative;overflow:hidden}
-    .project h4{margin:0;font-family:Poppins,sans-serif;font-weight:600;color:var(--brand2)}
+    /* Projects */
+    .projects{ display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:24px }
+    .project{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition: all .6s var(--transition);
+      position:relative; overflow:hidden; backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(30px) rotateY(15deg)
+    }
+    .project.animated{ opacity:1; transform: translateY(0) rotateY(0) }
+    .project:before{ content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background: linear-gradient(90deg, var(--brand), var(--brand2));
+      box-shadow:0 0 15px rgba(108,92,231,.7); transform: scaleX(0); transform-origin:left; transition: transform .8s var(--transition)
+    }
+    .project.animated:before{ transform: scaleX(1) }
+    .project:hover{ transform: translateY(-10px) rotateY(5deg) translateZ(10px); box-shadow: var(--glow) }
+    .project:hover:before{ transform: scaleX(1.1) }
+    .project h4{ font-size:1.3rem; margin-bottom:16px; transition: all .4s ease }
+    .project:hover h4{ color: var(--brand2) }
+    .project p{ color:var(--muted); margin-bottom:16px; font-size:1rem }
+    .tag{ display:inline-block; padding:8px 14px; border-radius:999px; font-weight:600; font-size:.85rem; background: rgba(0,206,201,.1);
+      color:var(--brand2); border:1px solid rgba(0,206,201,.3); transition: all .4s var(--transition); transform-style: preserve-3d
+    }
+    .tag:hover{ background: rgba(0,206,201,.2); transform: translateY(-3px) translateZ(5px); box-shadow:0 5px 10px rgba(0,206,201,.2) }
 
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+    /* Split */
+    .split{ display:grid; grid-template-columns:1fr 1fr; gap:24px }
+    .split > *{ opacity:0; transform: translateY(30px); transition: all .8s var(--transition) }
+    .split > *.animated{ opacity:1; transform: translateY(0) }
+    .split > *:nth-child(1){ transition-delay:.2s } .split > *:nth-child(2){ transition-delay:.4s }
 
-    footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.9rem}
+    /* Form */
+    .form-group{ margin-bottom:20px; position:relative; transform-style: preserve-3d }
+    input, textarea{ width:100%; padding:14px 18px; border-radius:var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.05);
+      color:var(--txt); font-family:'Inter',sans-serif; font-size:1rem; transition: all .4s var(--transition); backdrop-filter: blur(5px); transform-style: preserve-3d
+    }
+    input:focus, textarea:focus{ outline:none; border-color: var(--brand2); box-shadow: 0 0 0 3px rgba(0,206,201,.2); background: rgba(255,255,255,.1); transform: translateY(-2px) translateZ(5px) }
+    textarea{ min-height:150px; resize: vertical }
+    input::placeholder, textarea::placeholder{ color: rgba(255,255,255,.5) }
 
-    .cv-fab{position:fixed;right:20px;bottom:20px;z-index:200}
+    /* Socials */
+    .socials{ display:flex; gap:16px; margin-top:30px }
+    .socials a{ display:flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:50%; background:var(--panel-2); color:var(--txt);
+      transition: all .4s var(--transition); transform-style: preserve-3d; box-shadow:0 4px 8px rgba(0,0,0,.2); opacity:0; transform: translateY(20px)
+    }
+    .socials a.animated{ opacity:1; transform: translateY(0) }
+    .socials a:nth-child(1){ transition-delay:.4s } .socials a:nth-child(2){ transition-delay:.5s } .socials a:nth-child(3){ transition-delay:.6s }
+    .socials a:hover{ background: linear-gradient(45deg, var(--brand), var(--brand2)); color:#fff; transform: translateY(-5px) rotateY(15deg) translateZ(10px); box-shadow: var(--glow) }
 
-    .socials{display:flex;gap:16px;margin-top:14px}
-    .socials a img{width:28px;height:28px;filter:brightness(0) invert(1);transition:.25s}
-    .socials a img:hover{filter:brightness(1) invert(0.1)}
+    /* Footer */
+    footer{ padding:60px 0; text-align:center; color:var(--muted); font-size:1rem; position:relative; opacity:0; transform: translateY(20px); transition: all .8s var(--transition) }
+    footer.animated{ opacity:1; transform: translateY(0) }
+    footer:before{ content:''; position:absolute; top:0; left:50%; transform: translateX(-50%); width:80%; height:1px;
+      background: linear-gradient(90deg, transparent, var(--brand2), transparent); transform-origin:center; transform: scaleX(0);
+      transition: transform .8s var(--transition) .3s
+    }
+    footer.animated:before{ transform: translateX(-50%) scaleX(1) }
 
-    @media(max-width:900px){.hero .inner{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+    @keyframes float{ 0%,100%{ transform: translateY(0) rotate(0)} 25%{ transform: translateY(-10px) rotate(3deg)} 50%{ transform: translateY(-20px) rotate(5deg)} 75%{ transform: translateY(-10px) rotate(-3deg)} }
+
+    /* Responsive */
+    @media (max-width:1024px){ .hero .inner{ grid-template-columns:1fr; gap:40px } .split{ grid-template-columns:1fr } }
+    @media (max-width:768px){
+      h1{ font-size:2.8rem } h2{ font-size:2rem } .links{ display:none } .menu-btn{ display:block }
+      .sheet{ position:fixed; top:80px; right:24px; background:rgba(15,12,41,.95); border:1px solid var(--line); border-radius:var(--radius);
+        box-shadow:var(--shadow); display:none; z-index:100; min-width:200px; backdrop-filter: blur(12px); transform: translateY(20px); opacity:0; transition: all .4s var(--transition)
+      }
+      .sheet.show{ transform: translateY(0); opacity:1; display:block }
+      .sheet a{ display:block; padding:12px 20px; color:var(--txt); transition: all .3s ease; border-bottom:1px solid rgba(255,255,255,.05) }
+      .sheet a:hover{ background: rgba(108,92,231,.2); color:var(--brand2) }
+    }
+    @media (max-width:480px){ h1{ font-size:2.2rem } .btn{ width:100%; justify-content:center } .cta{ gap:12px } }
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-  <div class="orb blue"></div>
-  <div class="orb green"></div>
+  <!-- Particles -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
 
-  <nav class="top">
-    <div class="container wrap">
-      <div style="font-weight:700;color:#fff">Kashif Nazir</div>
-      <div class="navlinks">
-        <a href="#about" class="active">About</a>
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Primary">
+    <div class="wrap">
+      <div class="brand">Kashif Nazir</div>
+      <div class="links">
+        <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
+        <a class="btn secondary" href="Kashif_Nazir_Updated_CV.pdf" download><i class="fas fa-download"></i> CV</a>
       </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-haspopup="true" aria-controls="sheet"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="sheet" id="sheet" role="menu">
+      <a href="#about" role="menuitem" onclick="closeSheet()">About</a>
+      <a href="#skills" role="menuitem" onclick="closeSheet()">Skills</a>
+      <a href="#experience" role="menuitem" onclick="closeSheet()">Experience</a>
+      <a href="#projects" role="menuitem" onclick="closeSheet()">Projects</a>
+      <a href="#contact" role="menuitem" onclick="closeSheet()">Contact</a>
+      <a href="Kashif_Nazir_Updated_CV.pdf" download role="menuitem" onclick="closeSheet()"><i class="fas fa-download"></i> CV</a>
     </div>
   </nav>
 
+  <!-- HERO -->
   <header class="hero">
     <div class="container inner">
       <div>
-        <h1>Kashif Nazir</h1>
-        <p class="subtitle">Unity Game & VR Developer — Expert in Multiplayer (Photon, Netcode), XR (Meta Quest), and real-time streaming for immersive gameplay.</p>
+        <h1>Unity & VR Developer</h1>
+        <p class="subtitle">Multiplayer (Photon, Netcode), XR on Meta Quest, and real-time streaming — building smooth, immersive gameplay systems end-to-end.</p>
         <div class="cta">
-          <a class="btn primary" href="#projects">🚀 View Projects</a>
-          <a class="btn" href="#contact">📬 Contact</a>
-          <a class="btn ghost" href="Kashif_Nazir_Updated_CV.pdf" download>📄 Download CV</a>
+          <a class="btn primary" href="#projects"><i class="fas fa-rocket"></i> View Projects</a>
+          <a class="btn ghost" href="#contact"><i class="fas fa-envelope"></i> Contact</a>
         </div>
-        <div class="socials">
-          <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
-          <a href="mailto:kashifnazirsaeedi@gmail.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Email"></a>
-          <a href="tel:+923044145248"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"></a>
+        <div class="socials" aria-label="Social links">
+          <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:kashifnazirsaeedi@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://wa.me/923044145248" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
-      <div class="card">
-        <h3 style="margin-top:0">Highlights</h3>
-        <ul style="margin:0 0 0 20px">
+      <div class="card floating" aria-label="Highlights">
+        <h3><i class="fas fa-star" style="color: var(--brand2); margin-right: 8px;"></i> Highlights</h3>
+        <ul style="margin: 16px 0 0 20px">
           <li>Optimized VR sports gameplay (CricVRX) for Meta Quest.</li>
-          <li>Engineered Android TV ⇄ Quest real-time streaming via UDP.</li>
-          <li>Built multiplayer VR setups with Photon for smooth play.</li>
-          <li>Reusable VR interaction frameworks for rapid prototyping.</li>
+          <li>Android TV ⇄ Quest real-time streaming via UDP.</li>
+          <li>Photon multiplayer architectures for low latency.</li>
+          <li>Reusable VR interaction frameworks for rapid iteration.</li>
         </ul>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section id="about">
-      <h2>About</h2>
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
       <div class="card">
-        <p>Unity & VR Developer with proven expertise in multiplayer, XR integrations, and optimized game mechanics. Strong in end-to-end development, team collaboration, and shipping polished experiences on Meta Quest and mobile platforms.</p>
-        <p><strong>Location:</strong> Lahore, Pakistan · <strong>Open to:</strong> Remote, Contract, Full-time</p>
+        <p>Unity & VR Developer with strong experience in multiplayer systems, XR device integration, and polished gameplay/physics. I deliver end-to-end features, collaborate closely with teams, and ship to Meta Quest and mobile platforms.</p>
+        <p class="sub"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Lahore, Pakistan · <i class="fas fa-briefcase"></i> <strong>Open to:</strong> Remote / Contract / Full-time</p>
       </div>
     </section>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="card chips">
-        <span class="chip">Unity</span><span class="chip">C#</span><span class="chip">VR / XR</span><span class="chip">Meta Quest</span>
-        <span class="chip">Multiplayer</span><span class="chip">Photon</span><span class="chip">Netcode</span><span class="chip">Gameplay Physics</span>
-        <span class="chip">Interaction Systems</span><span class="chip">Android TV</span><span class="chip">UDP Streaming</span>
-        <span class="chip">Cesium 3D Maps</span><span class="chip">AdMob</span><span class="chip">IronSource</span>
-        <span class="chip">Firebase Remote Config</span><span class="chip">Mixed Reality</span><span class="chip">Cross-platform</span>
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <div class="card">
+        <div class="chips">
+          <span class="chip"><i class="fas fa-gamepad"></i> Unity</span>
+          <span class="chip"><i class="fas fa-code"></i> C#</span>
+          <span class="chip"><i class="fas fa-vr-cardboard"></i> VR / XR</span>
+          <span class="chip"><i class="fab fa-meta"></i> Meta Quest</span>
+          <span class="chip"><i class="fas fa-network-wired"></i> Multiplayer</span>
+          <span class="chip"><i class="fas fa-signal"></i> Photon</span>
+          <span class="chip"><i class="fas fa-code-branch"></i> Netcode</span>
+          <span class="chip"><i class="fas fa-atom"></i> Gameplay Physics</span>
+          <span class="chip"><i class="fas fa-hand-pointer"></i> Interaction Systems</span>
+          <span class="chip"><i class="fab fa-android"></i> Android TV</span>
+          <span class="chip"><i class="fas fa-broadcast-tower"></i> UDP Streaming</span>
+          <span class="chip"><i class="fas fa-map"></i> Cesium 3D Maps</span>
+          <span class="chip"><i class="fas fa-ad"></i> AdMob</span>
+          <span class="chip"><i class="fas fa-dollar-sign"></i> IronSource</span>
+          <span class="chip"><i class="fas fa-fire"></i> Firebase Remote Config</span>
+          <span class="chip"><i class="fas fa-glasses"></i> Mixed Reality</span>
+          <span class="chip"><i class="fas fa-mobile-alt"></i> Cross-platform</span>
+        </div>
       </div>
     </section>
 
-    <section id="experience">
-      <h2>Experience</h2>
+    <!-- EXPERIENCE -->
+    <section id="experience" aria-labelledby="exp-title">
+      <h2 id="exp-title">Experience</h2>
       <div class="timeline">
         <div class="job">
           <h3>Software Engineer (VR Game Developer) · Abstron</h3>
-          <div class="meta">Mar 2023 – Present · Lahore</div>
+          <div class="meta"><i class="far fa-calendar-alt"></i> Mar 2023 – Present · <i class="fas fa-map-marker-alt"></i> Lahore</div>
           <ul>
             <li>Developed CricVRX with optimized physics & controls.</li>
-            <li>Integrated Android TV to Quest streaming via UDP.</li>
+            <li>Integrated Android TV → Quest streaming via UDP.</li>
             <li>Photon-powered multiplayer VR systems.</li>
             <li>Reusable VR interactions for rapid iteration.</li>
           </ul>
         </div>
         <div class="job">
           <h3>VR Game Developer · Cherry Byte Technologies</h3>
-          <div class="meta">Mar 2022 – Feb 2023 · Lahore</div>
+          <div class="meta"><i class="far fa-calendar-alt"></i> Mar 2022 – Feb 2023 · <i class="fas fa-map-marker-alt"></i> Lahore</div>
           <ul>
             <li>Built mixed-reality XR experiences and Snapchat AR filters.</li>
-            <li>Cesium 3D VR world exploration with dynamic vehicle systems.</li>
-            <li>Monetization integrations with AdMob, IronSource, Firebase RC.</li>
+            <li>Cesium 3D VR world exploration with dynamic vehicles.</li>
+            <li>AdMob, IronSource, and Firebase Remote Config integrations.</li>
           </ul>
         </div>
         <div class="job">
           <h3>Game Developer · DevOps Studio Pvt Ltd</h3>
-          <div class="meta">Dec 2021 – Feb 2023 · Lahore</div>
+          <div class="meta"><i class="far fa-calendar-alt"></i> Dec 2021 – Feb 2023 · <i class="fas fa-map-marker-alt"></i> Lahore</div>
           <ul>
             <li>Developed 5+ 3D simulation games from scratch.</li>
-            <li>Gameplay design, level design, RPG mechanics.</li>
-            <li>Monetization integrations across multiple titles.</li>
+            <li>Gameplay & level design, RPG mechanics.</li>
+            <li>Monetization across multiple titles.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section id="projects">
-      <h2>Featured Projects</h2>
-      <div class="projects grid">
-        <div class="project">
-          <h4><a href="https://sidequestvr.com/app/31802/world-tour-flying-on-real-3d-maps" target="_blank">World Tour VR</a></h4>
-          <p>Explore real-world 3D maps in VR with helicopters, carpets, balloons.</p>
-        </div>
-        <div class="project">
-          <h4><a href="https://sidequestvr.com/app/10408/punchvrx-boxing-game" target="_blank">PunchVRX Boxing VR</a></h4>
-          <p>Multiplayer & AI boxing with training and fight modes.</p>
-        </div>
-        <div class="project">
-          <h4><a href="https://sidequestvr.com/app/35160/samurai-ninja-clash-fighting-game" target="_blank">Ninja Fight VR</a></h4>
-          <p>Multiplayer & AI ninja combat with Training, Survival, Fruit Slice.</p>
-        </div>
-        <div class="project">
-          <h4><a href="https://sidequestvr.com/app/10437/thunder-gladiator-fighting-game" target="_blank">Thunder of Gladiator XR</a></h4>
-          <p>Mixed-Reality sword fighting blending real and virtual.</p>
-        </div>
-      </div>
-    </section>
+   <!-- PROJECTS -->
+<section id="projects">
+  <h2>Featured Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h4><a href="https://sidequestvr.com/app/4813/cricvrx-virtual-cricket-with-real-talents" target="_blank">CricVRX — VR Cricket Game</a></h4>
+      <p>Realistic VR cricket with tuned physics, smooth Meta Quest controls, and multiplayer support.</p>
+      <span class="tag">VR · Meta Quest · Photon</span>
+    </div>
+    <div class="project">
+      <h4><a href="https://sidequestvr.com/app/7075/last-day-on-tower-action-shooting-game" target="_blank">Last Day on Tower — VR Shooting</a></h4>
+      <p>Action VR tower-defense shooter; survive waves, upgrade, and defend your position.</p>
+      <span class="tag">VR · Shooter · Optimization</span>
+    </div>
+    <div class="project">
+      <h4><a href="https://sidequestvr.com/app/31802/world-tour-flying-on-real-3d-maps" target="_blank">World Tour VR</a></h4>
+      <p>Fly over real-world 3D maps via helicopter, flying carpet, and air balloon.</p>
+      <span class="tag">VR · Exploration</span>
+    </div>
+    <div class="project">
+      <h4><a href="https://sidequestvr.com/app/10408/punchvrx-boxing-game" target="_blank">PunchVRX Boxing VR</a></h4>
+      <p>Multiplayer & AI boxing with training/fight modes and responsive hit feedback.</p>
+      <span class="tag">VR · Combat</span>
+    </div>
+    <div class="project">
+      <h4><a href="https://sidequestvr.com/app/35160/samurai-ninja-clash-fighting-game" target="_blank">Ninja Fight VR</a></h4>
+      <p>Fast-paced ninja combat with Training, Survival, and Fruit Slice modes.</p>
+      <span class="tag">VR · Melee</span>
+    </div>
+    <div class="project">
+      <h4><a href="https://sidequestvr.com/app/10437/thunder-gladiator-fighting-game" target="_blank">Thunder of Gladiator XR</a></h4>
+      <p>Mixed-Reality sword fighting — blend your room with virtual combat.</p>
+      <span class="tag">MR · XR</span>
+    </div>
 
-    <section id="contact">
-      <h2>Contact</h2>
+    <!-- Android TV ⇄ Quest Streaming -->
+    <div class="project">
+      <h4>Android TV ⇄ Quest Spectator Streaming</h4>
+      <p>Custom UDP pipeline to stream a spectator camera from Quest to Android TV with low latency and adaptive bitrate.</p>
+      <span class="tag">UDP</span>
+      <span class="tag">Spectator Cam</span>
+      <span class="tag">C#</span>
+    </div>
+
+    <!-- Multiplayer Framework -->
+    <div class="project">
+      <h4>Reusable VR Interaction & Multiplayer Framework</h4>
+      <p>Modular XR rig, grab/throw, and network sync prefabs to speed up new VR projects by ~40%.</p>
+      <span class="tag">Netcode / Photon</span>
+      <span class="tag">XR Toolkit</span>
+      <span class="tag">Prefab Library</span>
+    </div>
+  </div>
+</section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
       <div class="split">
         <div class="card">
-          <p><strong>Email:</strong> <a href="mailto:kashifnazirsaeedi@gmail.com" id="email">kashifnazirsaeedi@gmail.com</a></p>
-          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank">linkedin.com/in/kashifnazir2</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+923044145248">+92 304 4145248</a></p>
-          <p><strong>Location:</strong> Lahore, Pakistan</p>
+          <form id="contactForm" aria-label="Contact form">
+            <div class="form-group">
+              <label for="name" class="sr-only">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="sr-only">Email</label>
+              <input id="email" name="email" type="email" placeholder="Your email" required>
+            </div>
+            <div class="form-group">
+              <label for="message" class="sr-only">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+            </div>
+            <button class="btn primary" type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            <p id="formNote" class="sub" style="margin-top:10px"></p>
+          </form>
         </div>
-        <form class="card" action="mailto:kashifnazirsaeedi@gmail.com" method="post" enctype="text/plain">
-          <h3 style="margin-top:0">Quick Message</h3>
-          <input name="name" placeholder="Your name" required style="width:100%;padding:10px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:var(--chip);color:var(--txt)">
-          <textarea name="message" rows="4" placeholder="Your message" required style="width:100%;padding:10px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:var(--chip);color:var(--txt)"></textarea>
-          <button class="btn primary" type="submit">Send</button>
-        </form>
+        <div class="card">
+          <h3>Let’s build something immersive</h3>
+          <p class="sub">Open to freelance/contract and full-time roles. Based in Lahore, working remotely worldwide.</p>
+          <ul style="margin-left:20px; margin-top:10px">
+            <li>Rapid prototyping in Unity (VR/XR)</li>
+            <li>Multiplayer (Photon / Netcode)</li>
+            <li>Quest performance & deployment</li>
+          </ul>
+          <div class="socials" style="margin-top:20px">
+            <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:kashifnazirsaeedi@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/923044145248" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">© <span id="year"></span> Kashif Nazir · All Rights Reserved</div>
+  <!-- FOOTER -->
+  <footer id="footer">
+    © <span id="year"></span> Kashif Nazir · Unity & VR Developer
   </footer>
 
-  <div class="cv-fab">
-    <a class="btn primary" href="Kashif_Nazir_Updated_CV.pdf" download>📄 CV</a>
-  </div>
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kashif Nazir",
+    "jobTitle": "Unity & VR Developer",
+    "url": "https://your-domain.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/kashifnazir2"
+    ],
+    "knowsAbout": ["Unity", "VR", "XR", "Photon", "Netcode", "Meta Quest", "UDP Streaming"]
+  }
+  </script>
 
+  <!-- Scripts -->
   <script>
-  document.getElementById('year').textContent=new Date().getFullYear();
-  
-  // Stars background
-  const canvas=document.getElementById('stars');
-  const ctx=canvas.getContext('2d');
-  let w,h,stars=[];
-  
-  function resize(){
-    w=canvas.width=window.innerWidth;
-    h=canvas.height=window.innerHeight;
-  }
-  window.onresize=resize;
-  resize();
+    // Helpers
+    const qs = (s, root=document) => root.querySelector(s);
+    const qsa = (s, root=document) => [...root.querySelectorAll(s)];
 
-  function init(){
-    stars=[];
-    for(let i=0;i<200;i++){
-      stars.push({
-        x:Math.random()*w,
-        y:Math.random()*h,
-        r:Math.random()*1.5+0.5,  // star radius
-        d:Math.random()*0.5+0.2,  // fall speed
-        alpha:Math.random(),      // transparency
-        fade:Math.random()*0.02+0.005 // how fast it twinkles
-      });
-    }
-  }
+    // Mobile menu
+    const sheet = qs('#sheet');
+    const menuBtn = qs('#menuBtn');
+    function closeSheet(){ sheet.classList.remove('show'); }
+    menuBtn.addEventListener('click',()=> sheet.classList.toggle('show'));
+    document.addEventListener('click', (e)=>{
+      if(!sheet.contains(e.target) && e.target!==menuBtn) sheet.classList.remove('show');
+    });
 
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    for(let i=0;i<stars.length;i++){
-      let s=stars[i];
-      ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${s.alpha})`;
-      ctx.fill();
-    }
-    update();
-  }
-
-  function update(){
-    for(let i=0;i<stars.length;i++){
-      let s=stars[i];
-      // star movement
-      s.y+=s.d;
-      if(s.y>h){
-        stars[i]={x:Math.random()*w,y:0,r:s.r,d:s.d,alpha:Math.random(),fade:s.fade};
+    // Particles
+    (function makeParticles(){
+      const wrap = qs('#particles');
+      const COUNT = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 25000));
+      for(let i=0;i<COUNT;i++){
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random()*12 + 6;
+        p.style.width = p.style.height = size + 'px';
+        p.style.left = Math.random()*100 + '%';
+        p.style.top = Math.random()*100 + '%';
+        p.style.animationDuration = (12 + Math.random()*10) + 's';
+        p.style.animationDelay = (-Math.random()*15) + 's';
+        p.style.filter = `blur(${(Math.random()*2).toFixed(1)}px)`;
+        wrap.appendChild(p);
+        requestAnimationFrame(()=> p.style.opacity = 1);
       }
-      // twinkling effect
-      s.alpha+=s.fade;
-      if(s.alpha<=0 || s.alpha>=1){
-        s.fade*=-1; // reverse fade direction
-      }
-    }
-  }
+    })();
 
-  init();
-  setInterval(draw,33); // ~30 FPS
-</script>
+    // Intersection Observer for animations
+    const animateOnView = (selector) => {
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(ent=>{
+          if(ent.isIntersecting){
+            ent.target.classList.add('animated');
+            io.unobserve(ent.target);
+          }
+        });
+      }, {threshold: .15});
+      qsa(selector).forEach(el=> io.observe(el));
+    };
+    animateOnView('h2, .card, .chip, .job, .project, .split > *, .socials a, footer');
+
+    // Stagger chips
+    qsa('.chips .chip').forEach((c,i)=> c.style.transitionDelay = (0.05*i)+'s');
+
+    // Simple 3D tilt
+    function addTilt(el, intensity=10){
+      let rAF;
+      const rect = ()=> el.getBoundingClientRect();
+      function onMove(e){
+        cancelAnimationFrame(rAF);
+        rAF = requestAnimationFrame(()=>{
+          const b = rect();
+          const px = (e.clientX - b.left) / b.width - .5;
+          const py = (e.clientY - b.top) / b.height - .5;
+          el.style.transform = `rotateX(${(-py*intensity).toFixed(2)}deg) rotateY(${(px*intensity).toFixed(2)}deg) translateZ(10px)`;
+        });
+      }
+      function reset(){ el.style.transform = ''; }
+      el.addEventListener('mousemove', onMove);
+      el.addEventListener('mouseleave', reset);
+    }
+    qsa('.card, .project').forEach(el=> addTilt(el, 6));
+
+    // Contact form: open mailto with prefilled body
+    qs('#contactForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = qs('#name').value.trim();
+      const email = qs('#email').value.trim();
+      const message = qs('#message').value.trim();
+      const mail = 'kashifnazirsaeedi@gmail.com';
+      const subject = encodeURIComponent('Project Inquiry from Portfolio');
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from portfolio`
+      );
+      window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
+      const note = qs('#formNote');
+      note.textContent = 'Opening your email app… If nothing happens, email me directly at ' + mail;
+    });
+
+    // Year
+    qs('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
