@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kashif Nazir – Unity & VR Developer</title>
-  <meta name="description" content="Unity Game & VR Developer focused on Multiplayer (Photon), XR (Meta Quest), and real-time streaming. Portfolio, projects, and experience." />
+  <title>Blackbox Creations – Unity Developer & Asset Store Publisher</title>
+  <meta name="description" content="Unity Developer with 6+ years experience. Asset Store Publisher specializing in optimization tools, multiplayer solutions, and XR development." />
   <meta name="theme-color" content="#6c5ce7" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,7 +80,7 @@
       transition: all .4s var(--transition);
     }
     .brand:hover{ transform: scale(1.05); text-shadow:0 0 15px rgba(108,92,231,.8) }
-    .links{ display:flex; gap:16px }
+    .links{ display:flex; gap:16px; align-items: center; }
     .links a{ padding:8px 16px; border-radius:var(--radius); color:var(--txt); font-weight:500; font-size:.95rem; transition:all .4s var(--transition); transform-style: preserve-3d }
     .links a:hover{ color:white; background: rgba(108,92,231,.2); text-shadow:var(--text-glow); transform: translateY(-2px) translateZ(10px); box-shadow:0 5px 15px rgba(108,92,231,.3)}
     .menu-btn{ display:none; background:none; border:none; color:var(--txt); font-size:1.5rem; cursor:pointer; transition:all .4s var(--transition); transform-style: preserve-3d }
@@ -141,28 +141,8 @@
     .chip.animated{ opacity:1; transform: translateY(0) scale(1) }
     .chip:hover{ background: rgba(108,92,231,.2); transform: translateY(-5px) scale(1.05) translateZ(5px); box-shadow:0 5px 15px rgba(108,92,231,.3) }
 
-    /* Timeline */
-    .timeline{ display:grid; gap:24px }
-    .job{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition: all .6s var(--transition);
-      position:relative; overflow:hidden; backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(30px)
-    }
-    .job.animated{ opacity:1; transform: translateY(0) }
-    .job:hover{ transform: translateY(-10px) rotateX(2deg) translateZ(10px); box-shadow: var(--glow) }
-    .job:before{ content:''; position:absolute; top:0; left:0; width:4px; height:100%; background: linear-gradient(to bottom, var(--brand), var(--brand2));
-      box-shadow:0 0 10px rgba(108,92,231,.7); transform: scaleY(0); transform-origin: top; transition: transform .8s var(--transition) .3s
-    }
-    .job.animated:before{ transform: scaleY(1) }
-    .job h3{ font-size:1.3rem; margin-bottom:10px }
-    .meta{ color:var(--muted); font-size:1rem; margin-bottom:16px; display:flex; align-items:center; gap:8px }
-    .meta i{ font-size:.9rem }
-    .job ul{ margin-left:20px }
-    .job li{ margin-bottom:10px; position:relative; opacity:0; transform: translateX(-10px); transition: all .4s ease }
-    .job.animated li{ opacity:1; transform: translateX(0) }
-    .job li:nth-child(1){ transition-delay:.4s } .job li:nth-child(2){ transition-delay:.5s } .job li:nth-child(3){ transition-delay:.6s } .job li:nth-child(4){ transition-delay:.7s }
-    .job li:before{ content:'▹'; position:absolute; left:-20px; color:var(--brand2) }
-
-    /* Projects */
-    .projects{ display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:24px }
+    /* Projects Grid */
+    .projects{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:24px }
     .project{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition: all .6s var(--transition);
       position:relative; overflow:hidden; backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(30px) rotateY(15deg)
     }
@@ -177,7 +157,7 @@
     .project:hover h4{ color: var(--brand2) }
     .project p{ color:var(--muted); margin-bottom:16px; font-size:1rem }
     .tag{ display:inline-block; padding:8px 14px; border-radius:999px; font-weight:600; font-size:.85rem; background: rgba(0,206,201,.1);
-      color:var(--brand2); border:1px solid rgba(0,206,201,.3); transition: all .4s var(--transition); transform-style: preserve-3d
+      color:var(--brand2); border:1px solid rgba(0,206,201,.3); transition: all .4s var(--transition); transform-style: preserve-3d; margin: 4px;
     }
     .tag:hover{ background: rgba(0,206,201,.2); transform: translateY(-3px) translateZ(5px); box-shadow:0 5px 10px rgba(0,206,201,.2) }
 
@@ -202,7 +182,7 @@
       transition: all .4s var(--transition); transform-style: preserve-3d; box-shadow:0 4px 8px rgba(0,0,0,.2); opacity:0; transform: translateY(20px)
     }
     .socials a.animated{ opacity:1; transform: translateY(0) }
-    .socials a:nth-child(1){ transition-delay:.4s } .socials a:nth-child(2){ transition-delay:.5s } .socials a:nth-child(3){ transition-delay:.6s }
+    .socials a:nth-child(1){ transition-delay:.4s } .socials a:nth-child(2){ transition-delay:.5s }
     .socials a:hover{ background: linear-gradient(45deg, var(--brand), var(--brand2)); color:#fff; transform: translateY(-5px) rotateY(15deg) translateZ(10px); box-shadow: var(--glow) }
 
     /* Footer */
@@ -216,18 +196,39 @@
 
     @keyframes float{ 0%,100%{ transform: translateY(0) rotate(0)} 25%{ transform: translateY(-10px) rotate(3deg)} 50%{ transform: translateY(-20px) rotate(5deg)} 75%{ transform: translateY(-10px) rotate(-3deg)} }
 
+    .store-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff6b6b, #feca57);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-left: 10px;
+      color: white;
+    }
+
     /* Responsive */
     @media (max-width:1024px){ .hero .inner{ grid-template-columns:1fr; gap:40px } .split{ grid-template-columns:1fr } }
     @media (max-width:768px){
-      h1{ font-size:2.8rem } h2{ font-size:2rem } .links{ display:none } .menu-btn{ display:block }
-      .sheet{ position:fixed; top:80px; right:24px; background:rgba(15,12,41,.95); border:1px solid var(--line); border-radius:var(--radius);
-        box-shadow:var(--shadow); display:none; z-index:100; min-width:200px; backdrop-filter: blur(12px); transform: translateY(20px); opacity:0; transition: all .4s var(--transition)
-      }
-      .sheet.show{ transform: translateY(0); opacity:1; display:block }
-      .sheet a{ display:block; padding:12px 20px; color:var(--txt); transition: all .3s ease; border-bottom:1px solid rgba(255,255,255,.05) }
-      .sheet a:hover{ background: rgba(108,92,231,.2); color:var(--brand2) }
+      h1{ font-size:2.8rem } h2{ font-size:2rem } 
+      .links{ display:none; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(15,12,41,.95); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,.3); transform: translateY(-20px); opacity: 0; transition: all .3s ease; z-index: 1000; }
+      .links.active{ transform: translateY(0); opacity: 1; display: flex; }
+      .menu-btn{ display:block; z-index: 101; }
     }
     @media (max-width:480px){ h1{ font-size:2.2rem } .btn{ width:100%; justify-content:center } .cta{ gap:12px } }
+    
+    /* Accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
   </style>
 </head>
 <body>
@@ -237,24 +238,21 @@
   <!-- NAV -->
   <nav class="nav" role="navigation" aria-label="Primary">
     <div class="wrap">
-      <div class="brand">Kashif Nazir</div>
-      <div class="links">
+      <div class="brand">
+        Blackbox Creations
+        <span class="store-badge"><i class="fas fa-store"></i> Asset Publisher</span>
+      </div>
+      <div class="links" id="navLinks">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
+        <a href="#assets">Unity Assets</a>
         <a href="#contact">Contact</a>
-        <a class="btn secondary" href="Kashif_Nazir_Updated_CV.pdf" download><i class="fas fa-download"></i> CV</a>
+        <a class="btn secondary" href="#" download><i class="fas fa-download"></i> CV</a>
       </div>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-haspopup="true" aria-controls="sheet"><i class="fas fa-bars"></i></button>
-    </div>
-    <div class="sheet" id="sheet" role="menu">
-      <a href="#about" role="menuitem" onclick="closeSheet()">About</a>
-      <a href="#skills" role="menuitem" onclick="closeSheet()">Skills</a>
-      <a href="#experience" role="menuitem" onclick="closeSheet()">Experience</a>
-      <a href="#projects" role="menuitem" onclick="closeSheet()">Projects</a>
-      <a href="#contact" role="menuitem" onclick="closeSheet()">Contact</a>
-      <a href="Kashif_Nazir_Updated_CV.pdf" download role="menuitem" onclick="closeSheet()"><i class="fas fa-download"></i> CV</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="sr-only">Menu</span>
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </nav>
 
@@ -262,25 +260,25 @@
   <header class="hero">
     <div class="container inner">
       <div>
-        <h1>Unity & VR Developer</h1>
-        <p class="subtitle">Multiplayer (Photon, Netcode), XR on Meta Quest, and real-time streaming — building smooth, immersive gameplay systems end-to-end.</p>
+        <h1>Unity Developer <br><span style="font-size: 1.8rem;">& Asset Store Publisher</span></h1>
+        <p class="subtitle">6+ years of experience in Unity development, creating optimization tools, multiplayer solutions, and immersive XR experiences. Published 6+ high-quality assets on Unity Asset Store.</p>
         <div class="cta">
-          <a class="btn primary" href="#projects"><i class="fas fa-rocket"></i> View Projects</a>
+          <a class="btn primary" href="#assets"><i class="fas fa-cube"></i> View Assets</a>
           <a class="btn ghost" href="#contact"><i class="fas fa-envelope"></i> Contact</a>
         </div>
         <div class="socials" aria-label="Social links">
-          <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="mailto:kashifnazirsaeedi@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="mailto:blackboxcreations@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
           <a href="https://wa.me/923044145248" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
       <div class="card floating" aria-label="Highlights">
         <h3><i class="fas fa-star" style="color: var(--brand2); margin-right: 8px;"></i> Highlights</h3>
         <ul style="margin: 16px 0 0 20px">
-          <li>Optimized VR sports gameplay (CricVRX) for Meta Quest.</li>
-          <li>Android TV ⇄ Quest real-time streaming via UDP.</li>
-          <li>Photon multiplayer architectures for low latency.</li>
-          <li>Reusable VR interaction frameworks for rapid iteration.</li>
+          <li>6+ Years Unity Development Experience</li>
+          <li>Published Asset Store Developer (6+ tools)</li>
+          <li>Specialized in Optimization & Multiplayer</li>
+          <li>XR Development on Meta Quest</li>
+          <li>Custom Unity Tools & Editor Extensions</li>
         </ul>
       </div>
     </div>
@@ -289,133 +287,101 @@
   <main class="container">
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-title">
-      <h2 id="about-title">About</h2>
+      <h2 id="about-title">About Blackbox Creations</h2>
       <div class="card">
-        <p>Unity & VR Developer with strong experience in multiplayer systems, XR device integration, and polished gameplay/physics. I deliver end-to-end features, collaborate closely with teams, and ship to Meta Quest and mobile platforms.</p>
-        <p class="sub"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Lahore, Pakistan · <i class="fas fa-briefcase"></i> <strong>Open to:</strong> Remote / Contract / Full-time</p>
+        <p>Blackbox Creations is a Unity development studio with over 6 years of experience in game development, XR applications, and tool creation. As an Asset Store publisher, we've helped thousands of developers optimize their games with our tools. We specialize in creating efficient, well-documented Unity assets that solve real development challenges.</p>
+        <br>
+        <p><strong>What we do:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>Create high-quality Unity assets for optimization and networking</li>
+          <li>Develop VR/XR experiences for Meta Quest and other platforms</li>
+          <li>Build multiplayer systems using Photon and Netcode</li>
+          <li>Provide technical consulting and custom tool development</li>
+        </ul>
+        <p class="sub" style="margin-top: 20px;"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Lahore, Pakistan · <i class="fas fa-briefcase"></i> <strong>Open to:</strong> Remote / Contract / Full-time</p>
       </div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills" aria-labelledby="skills-title">
-      <h2 id="skills-title">Skills</h2>
+      <h2 id="skills-title">Skills & Expertise</h2>
       <div class="card">
         <div class="chips">
           <span class="chip"><i class="fas fa-gamepad"></i> Unity</span>
           <span class="chip"><i class="fas fa-code"></i> C#</span>
+          <span class="chip"><i class="fas fa-tools"></i> Editor Tools</span>
+          <span class="chip"><i class="fas fa-chart-line"></i> Optimization</span>
+          <span class="chip"><i class="fas fa-cubes"></i> Mesh Combining</span>
+          <span class="chip"><i class="fas fa-magic"></i> LOD Generation</span>
           <span class="chip"><i class="fas fa-vr-cardboard"></i> VR / XR</span>
           <span class="chip"><i class="fab fa-meta"></i> Meta Quest</span>
           <span class="chip"><i class="fas fa-network-wired"></i> Multiplayer</span>
           <span class="chip"><i class="fas fa-signal"></i> Photon</span>
           <span class="chip"><i class="fas fa-code-branch"></i> Netcode</span>
-          <span class="chip"><i class="fas fa-atom"></i> Gameplay Physics</span>
-          <span class="chip"><i class="fas fa-hand-pointer"></i> Interaction Systems</span>
-          <span class="chip"><i class="fab fa-android"></i> Android TV</span>
-          <span class="chip"><i class="fas fa-broadcast-tower"></i> UDP Streaming</span>
-          <span class="chip"><i class="fas fa-map"></i> Cesium 3D Maps</span>
-          <span class="chip"><i class="fas fa-ad"></i> AdMob</span>
-          <span class="chip"><i class="fas fa-dollar-sign"></i> IronSource</span>
-          <span class="chip"><i class="fas fa-fire"></i> Firebase Remote Config</span>
-          <span class="chip"><i class="fas fa-glasses"></i> Mixed Reality</span>
+          <span class="chip"><i class="fas fa-broadcast-tower"></i> UDP Networking</span>
           <span class="chip"><i class="fas fa-mobile-alt"></i> Cross-platform</span>
+          <span class="chip"><i class="fas fa-atom"></i> Physics Systems</span>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" aria-labelledby="exp-title">
-      <h2 id="exp-title">Experience</h2>
-      <div class="timeline">
-        <div class="job">
-          <h3>Software Engineer (VR Game Developer) · Abstron</h3>
-          <div class="meta"><i class="far fa-calendar-alt"></i> Mar 2023 – Present · <i class="fas fa-map-marker-alt"></i> Lahore</div>
-          <ul>
-            <li>Developed CricVRX with optimized physics & controls.</li>
-            <li>Integrated Android TV → Quest streaming via UDP.</li>
-            <li>Photon-powered multiplayer VR systems.</li>
-            <li>Reusable VR interactions for rapid iteration.</li>
-          </ul>
+    <!-- UNITY ASSETS -->
+    <section id="assets">
+      <h2>Unity Asset Store Products</h2>
+      <div class="projects">
+        <div class="project">
+          <h4><a href="https://assetstore.unity.com/packages/slug/373210" target="_blank">Mesh Polygon Optimizer</a></h4>
+          <p>Auto LOD Generator & Mesh Combiner - Automatically optimize your meshes with intelligent LOD generation and mesh combining algorithms.</p>
+          <span class="tag">Optimization</span>
+          <span class="tag">LOD</span>
+          <span class="tag">Mesh Combining</span>
         </div>
-        <div class="job">
-          <h3>VR Game Developer · Cherry Byte Technologies</h3>
-          <div class="meta"><i class="far fa-calendar-alt"></i> Mar 2022 – Feb 2023 · <i class="fas fa-map-marker-alt"></i> Lahore</div>
-          <ul>
-            <li>Built mixed-reality XR experiences and Snapchat AR filters.</li>
-            <li>Cesium 3D VR world exploration with dynamic vehicles.</li>
-            <li>AdMob, IronSource, and Firebase Remote Config integrations.</li>
-          </ul>
+
+        <div class="project">
+          <h4><a href="https://assetstore.unity.com/packages/slug/374654" target="_blank">One-Click LOD Suite</a></h4>
+          <p>Batch LOD Generator & Optimizer - Generate LODs for multiple meshes with one click. Perfect for large projects needing performance optimization.</p>
+          <span class="tag">Batch Processing</span>
+          <span class="tag">LOD</span>
+          <span class="tag">Performance</span>
         </div>
-        <div class="job">
-          <h3>Game Developer · DevOps Studio Pvt Ltd</h3>
-          <div class="meta"><i class="far fa-calendar-alt"></i> Dec 2021 – Feb 2023 · <i class="fas fa-map-marker-alt"></i> Lahore</div>
-          <ul>
-            <li>Developed 5+ 3D simulation games from scratch.</li>
-            <li>Gameplay & level design, RPG mechanics.</li>
-            <li>Monetization across multiple titles.</li>
-          </ul>
+
+        <div class="project">
+          <h4><a href="https://assetstore.unity.com/packages/slug/374896" target="_blank">MeshWeld Pro</a></h4>
+          <p>Mesh Combiner & Texture Atlas - Combine multiple meshes into one and generate texture atlases automatically to reduce draw calls.</p>
+          <span class="tag">Mesh Combining</span>
+          <span class="tag">Texture Atlas</span>
+          <span class="tag">Optimization</span>
+        </div>
+
+        <div class="project">
+          <h4><a href="https://assetstore.unity.com/packages/slug/374934" target="_blank">One Click Mesh Optimizer</a></h4>
+          <p>Reduce Tris & Vertices - Instantly reduce polygon count while preserving visual quality. Ideal for mobile and VR optimization.</p>
+          <span class="tag">Decimation</span>
+          <span class="tag">Polygon Reduction</span>
+          <span class="tag">Mobile Ready</span>
+        </div>
+
+        <div class="project">
+          <h4><a href="https://assetstore.unity.com/packages/slug/371126" target="_blank">Smart Distributor</a></h4>
+          <p>Object Placement Tool for Unity - Intelligently place objects on surfaces with advanced randomization and positioning controls.</p>
+          <span class="tag">Level Design</span>
+          <span class="tag">Procedural</span>
+          <span class="tag">Placement Tool</span>
+        </div>
+
+        <div class="project">
+          <h4><a href="https://assetstore.unity.com/packages/slug/370348" target="_blank">UDP Networking Pro</a></h4>
+          <p>Auto Device Discovery, LAN, Messaging & VR/PC/Mobile - Complete UDP networking solution with automatic device discovery and cross-platform support.</p>
+          <span class="tag">Networking</span>
+          <span class="tag">UDP</span>
+          <span class="tag">Cross-Platform</span>
         </div>
       </div>
     </section>
-
-   <!-- PROJECTS -->
-<section id="projects">
-  <h2>Featured Projects</h2>
-  <div class="projects">
-    <div class="project">
-      <h4><a href="https://sidequestvr.com/app/4813/cricvrx-virtual-cricket-with-real-talents" target="_blank">CricVRX — VR Cricket Game</a></h4>
-      <p>Realistic VR cricket with tuned physics, smooth Meta Quest controls, and multiplayer support.</p>
-      <span class="tag">VR · Meta Quest · Photon</span>
-    </div>
-    <div class="project">
-      <h4><a href="https://sidequestvr.com/app/7075/last-day-on-tower-action-shooting-game" target="_blank">Last Day on Tower — VR Shooting</a></h4>
-      <p>Action VR tower-defense shooter; survive waves, upgrade, and defend your position.</p>
-      <span class="tag">VR · Shooter · Optimization</span>
-    </div>
-    <div class="project">
-      <h4><a href="https://sidequestvr.com/app/31802/world-tour-flying-on-real-3d-maps" target="_blank">World Tour VR</a></h4>
-      <p>Fly over real-world 3D maps via helicopter, flying carpet, and air balloon.</p>
-      <span class="tag">VR · Exploration</span>
-    </div>
-    <div class="project">
-      <h4><a href="https://sidequestvr.com/app/10408/punchvrx-boxing-game" target="_blank">PunchVRX Boxing VR</a></h4>
-      <p>Multiplayer & AI boxing with training/fight modes and responsive hit feedback.</p>
-      <span class="tag">VR · Combat</span>
-    </div>
-    <div class="project">
-      <h4><a href="https://sidequestvr.com/app/35160/samurai-ninja-clash-fighting-game" target="_blank">Ninja Fight VR</a></h4>
-      <p>Fast-paced ninja combat with Training, Survival, and Fruit Slice modes.</p>
-      <span class="tag">VR · Melee</span>
-    </div>
-    <div class="project">
-      <h4><a href="https://sidequestvr.com/app/10437/thunder-gladiator-fighting-game" target="_blank">Thunder of Gladiator XR</a></h4>
-      <p>Mixed-Reality sword fighting — blend your room with virtual combat.</p>
-      <span class="tag">MR · XR</span>
-    </div>
-
-    <!-- Android TV ⇄ Quest Streaming -->
-    <div class="project">
-      <h4>Android TV ⇄ Quest Spectator Streaming</h4>
-      <p>Custom UDP pipeline to stream a spectator camera from Quest to Android TV with low latency and adaptive bitrate.</p>
-      <span class="tag">UDP</span>
-      <span class="tag">Spectator Cam</span>
-      <span class="tag">C#</span>
-    </div>
-
-    <!-- Multiplayer Framework -->
-    <div class="project">
-      <h4>Reusable VR Interaction & Multiplayer Framework</h4>
-      <p>Modular XR rig, grab/throw, and network sync prefabs to speed up new VR projects by ~40%.</p>
-      <span class="tag">Netcode / Photon</span>
-      <span class="tag">XR Toolkit</span>
-      <span class="tag">Prefab Library</span>
-    </div>
-  </div>
-</section>
-
 
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
+      <h2 id="contact-title">Get In Touch</h2>
       <div class="split">
         <div class="card">
           <form id="contactForm" aria-label="Contact form">
@@ -429,23 +395,24 @@
             </div>
             <div class="form-group">
               <label for="message" class="sr-only">Message</label>
-              <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+              <textarea id="message" name="message" placeholder="Tell me about your project or asset needs..." required></textarea>
             </div>
             <button class="btn primary" type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
             <p id="formNote" class="sub" style="margin-top:10px"></p>
           </form>
         </div>
         <div class="card">
-          <h3>Let’s build something immersive</h3>
-          <p class="sub">Open to freelance/contract and full-time roles. Based in Lahore, working remotely worldwide.</p>
+          <h3>Let's Work Together</h3>
+          <p class="sub">Available for custom tool development, consulting, and full-scale Unity projects.</p>
           <ul style="margin-left:20px; margin-top:10px">
-            <li>Rapid prototyping in Unity (VR/XR)</li>
-            <li>Multiplayer (Photon / Netcode)</li>
-            <li>Quest performance & deployment</li>
+            <li>Custom Unity Editor Tools</li>
+            <li>Asset Store Publishing Consultation</li>
+            <li>VR/XR Development</li>
+            <li>Multiplayer Systems</li>
+            <li>Performance Optimization</li>
           </ul>
           <div class="socials" style="margin-top:20px">
-            <a href="https://www.linkedin.com/in/kashifnazir2" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:kashifnazirsaeedi@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:blackboxcreations@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://wa.me/923044145248" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
@@ -455,43 +422,59 @@
 
   <!-- FOOTER -->
   <footer id="footer">
-    © <span id="year"></span> Kashif Nazir · Unity & VR Developer
+    © <span id="year"></span> Blackbox Creations · Unity Developer & Asset Store Publisher · 6+ Years Experience
   </footer>
 
-  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Kashif Nazir",
-    "jobTitle": "Unity & VR Developer",
+    "@type": "Organization",
+    "name": "Blackbox Creations",
+    "jobTitle": "Unity Developer & Asset Store Publisher",
     "url": "https://your-domain.com",
-    "sameAs": [
-      "https://www.linkedin.com/in/kashifnazir2"
-    ],
-    "knowsAbout": ["Unity", "VR", "XR", "Photon", "Netcode", "Meta Quest", "UDP Streaming"]
+    "knowsAbout": ["Unity", "C#", "Asset Store", "VR", "XR", "Optimization", "Multiplayer", "UDP Networking", "Mesh Optimization", "LOD Generation"]
   }
   </script>
 
-  <!-- Scripts -->
   <script>
     // Helpers
     const qs = (s, root=document) => root.querySelector(s);
     const qsa = (s, root=document) => [...root.querySelectorAll(s)];
 
     // Mobile menu
-    const sheet = qs('#sheet');
+    const navLinks = qs('#navLinks');
     const menuBtn = qs('#menuBtn');
-    function closeSheet(){ sheet.classList.remove('show'); }
-    menuBtn.addEventListener('click',()=> sheet.classList.toggle('show'));
-    document.addEventListener('click', (e)=>{
-      if(!sheet.contains(e.target) && e.target!==menuBtn) sheet.classList.remove('show');
+    
+    function toggleMenu() {
+      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', !isExpanded);
+      navLinks.classList.toggle('active');
+      
+      qsa('#navLinks a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+    
+    if (menuBtn) {
+      menuBtn.addEventListener('click', toggleMenu);
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navLinks && !navLinks.contains(e.target) && menuBtn && !menuBtn.contains(e.target)) {
+        navLinks.classList.remove('active');
+        if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+      }
     });
 
     // Particles
     (function makeParticles(){
       const wrap = qs('#particles');
-      const COUNT = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 25000));
+      if (!wrap) return;
+      const COUNT = Math.min(60, Math.floor((window.innerWidth * window.innerHeight) / 30000));
       for(let i=0;i<COUNT;i++){
         const p = document.createElement('div');
         p.className = 'particle';
@@ -519,7 +502,7 @@
       }, {threshold: .15});
       qsa(selector).forEach(el=> io.observe(el));
     };
-    animateOnView('h2, .card, .chip, .job, .project, .split > *, .socials a, footer');
+    animateOnView('h2, .card, .chip, .project, .split > *, .socials a, footer');
 
     // Stagger chips
     qsa('.chips .chip').forEach((c,i)=> c.style.transitionDelay = (0.05*i)+'s');
@@ -544,23 +527,27 @@
     qsa('.card, .project').forEach(el=> addTilt(el, 6));
 
     // Contact form: open mailto with prefilled body
-    qs('#contactForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = qs('#name').value.trim();
-      const email = qs('#email').value.trim();
-      const message = qs('#message').value.trim();
-      const mail = 'kashifnazirsaeedi@gmail.com';
-      const subject = encodeURIComponent('Project Inquiry from Portfolio');
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from portfolio`
-      );
-      window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
-      const note = qs('#formNote');
-      note.textContent = 'Opening your email app… If nothing happens, email me directly at ' + mail;
-    });
+    const contactForm = qs('#contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const name = qs('#name').value.trim();
+        const email = qs('#email').value.trim();
+        const message = qs('#message').value.trim();
+        const mail = 'blackboxcreations@gmail.com';
+        const subject = encodeURIComponent('Project Inquiry from Portfolio');
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from Blackbox Creations portfolio`
+        );
+        window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
+        const note = qs('#formNote');
+        note.textContent = 'Opening your email app… If nothing happens, email us directly at ' + mail;
+      });
+    }
 
     // Year
-    qs('#year').textContent = new Date().getFullYear();
+    const yearSpan = qs('#year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
