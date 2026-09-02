@@ -355,520 +355,65 @@
 
       <div class="contact-side">
         <h3>Let's work together</h3>
-        <p>Available for custom tool development, consulting, and full-scale Unity projects.</p      color: var(--txt);
-      line-height: 1.7;
-      overflow-x: hidden;
-      position: relative;
-    }
-    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: white; }
-    a { color: var(--brand2); text-decoration: none; transition: all 0.4s var(--transition) }
-    a:hover { color: white; text-shadow: var(--text-glow) }
-
-    /* Particles */
-    .particles {
-      position: fixed; inset: 0;
-      z-index: -1; overflow: hidden; perspective: 1000px;
-    }
-    .particle {
-      position: absolute; border-radius: 50%;
-      background: linear-gradient(145deg, rgba(108,92,231,.2), rgba(0,206,201,.1));
-      box-shadow: 0 0 20px rgba(108,92,231,.3);
-      animation: float 15s infinite ease-in-out;
-      transform-style: preserve-3d; will-change: transform;
-      opacity: 0; transition: opacity 1.5s ease;
-    }
-    .particle:nth-child(odd){
-      background: linear-gradient(145deg, rgba(253,121,168,.15), rgba(0,206,201,.1));
-    }
-    @keyframes float{
-      0%,100%{ transform: translate3d(0,0,0) rotate(0) scale(1)}
-      25%{ transform: translate3d(20px,30px,30px) rotate(90deg) scale(1.1)}
-      50%{ transform: translate3d(-30px,20px,40px) rotate(180deg) scale(.9)}
-      75%{ transform: translate3d(10px,-20px,20px) rotate(270deg) scale(1.05)}
-    }
-
-    /* Navbar */
-    .nav{ position: sticky; top:0; z-index:100; backdrop-filter: blur(12px);
-      background: rgba(15,12,41,.7); border-bottom:1px solid var(--line);
-      box-shadow: 0 4px 30px rgba(0,0,0,.3); transform: translateY(-100%);
-      animation: slideDown .8s var(--transition) .3s forwards;
-    }
-    @keyframes slideDown{ to{ transform: translateY(0)} }
-    .nav .wrap{ max-width:1200px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between }
-    .brand{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; letter-spacing:1px;
-      background: linear-gradient(90deg,var(--brand),var(--brand2));
-      -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:var(--text-glow);
-      transition: all .4s var(--transition);
-    }
-    .brand:hover{ transform: scale(1.05); text-shadow:0 0 15px rgba(108,92,231,.8) }
-    .links{ display:flex; gap:16px; align-items: center; }
-    .links a{ padding:8px 16px; border-radius:var(--radius); color:var(--txt); font-weight:500; font-size:.95rem; transition:all .4s var(--transition); transform-style: preserve-3d }
-    .links a:hover{ color:white; background: rgba(108,92,231,.2); text-shadow:var(--text-glow); transform: translateY(-2px) translateZ(10px); box-shadow:0 5px 15px rgba(108,92,231,.3)}
-    .menu-btn{ display:none; background:none; border:none; color:var(--txt); font-size:1.5rem; cursor:pointer; transition:all .4s var(--transition); transform-style: preserve-3d }
-    .menu-btn:hover{ color:var(--brand2); transform: rotate(90deg) translateZ(10px) }
-
-    /* Hero */
-    .hero{ padding:120px 0 80px; position:relative; overflow:hidden }
-    .container{ max-width:1200px; margin:0 auto; padding:0 24px }
-    .hero .inner{ display:grid; grid-template-columns: 1.2fr .8fr; gap:40px; align-items:center }
-    h1{ font-size:3.5rem; line-height:1.2; margin-bottom:20px; background: linear-gradient(90deg, #fff, var(--brand2));
-      -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:var(--text-glow);
-      perspective:1000px; transform-style: preserve-3d; animation: titleFloat 6s infinite ease-in-out, fadeInUp 1s var(--transition) both;
-    }
-    @keyframes titleFloat{
-      0%,100%{ transform: translate3d(0,0,0) rotateX(0) rotateY(0)}
-      25%{ transform: translate3d(0,-8px,15px) rotateX(3deg) rotateY(3deg)}
-      50%{ transform: translate3d(0,-12px,25px) rotateX(5deg) rotateY(5deg)}
-      75%{ transform: translate3d(0,-8px,15px) rotateX(3deg) rotateY(-3deg)}
-    }
-    @keyframes fadeInUp{ from{ opacity:0; transform: translateY(30px)} to{ opacity:1; transform: translateY(0)} }
-    .subtitle{ color:var(--muted); font-size:1.2rem; max-width:600px; margin-bottom:30px; animation: fadeIn 1s var(--transition) .2s both }
-    @keyframes fadeIn{ from{ opacity:0} to{ opacity:1} }
-    .cta{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:30px; animation: fadeIn 1s var(--transition) .4s both }
-    .btn{ display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:var(--radius); font-weight:600;
-      transition: all .4s var(--transition); border:1px solid transparent; transform-style: preserve-3d; position:relative; overflow:hidden; will-change: transform;
-    }
-    .btn::before{ content:''; position:absolute; inset:0; background: linear-gradient(45deg, transparent, rgba(255,255,255,.15), transparent);
-      transform: translateX(-100%); transition: transform .8s ease;
-    }
-    .btn:hover::before{ transform: translateX(100%) }
-    .btn:hover{ transform: translateY(-5px) scale(1.03) translateZ(10px); box-shadow: var(--glow) }
-    .btn.primary{ background: linear-gradient(45deg, var(--brand), var(--brand2)); color:#fff; box-shadow:0 4px 15px rgba(108,92,231,.4) }
-    .btn.secondary{ background: var(--panel-2); color:var(--txt); border:1px solid var(--line) }
-    .btn.ghost{ background: transparent; color:var(--txt); border:1px solid var(--line) }
-
-    /* Cards / Sections */
-    .card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow);
-      transition: all .6s var(--transition); backdrop-filter: blur(8px); transform-style: preserve-3d; perspective:1000px; will-change: transform;
-      opacity:0; transform: translateY(30px) rotateX(15deg);
-    }
-    .card.animated{ opacity:1; transform: translateY(0) rotateX(0) }
-    .card:hover{ transform: translateY(-10px) rotateX(5deg) rotateY(5deg) translateZ(10px); box-shadow: var(--glow), 0 20px 25px -5px rgba(0,0,0,.3); background: rgba(108,92,231,.1) }
-    .floating{ animation: float 6s ease-in-out infinite }
-    section{ padding:100px 0; position:relative }
-    h2{ font-size:2.5rem; margin-bottom:40px; position:relative; display:inline-block; opacity:0; transform: translateY(20px); transition: all .8s var(--transition) }
-    h2.animated{ opacity:1; transform: translateY(0) }
-    h2:after{ content:''; position:absolute; bottom:-15px; left:0; width:80px; height:4px; background: linear-gradient(90deg, var(--brand), var(--brand2));
-      border-radius:2px; box-shadow:0 0 15px rgba(108,92,231,.7); transform-origin:left; transform: scaleX(0); transition: transform .8s var(--transition) .3s
-    }
-    h2.animated:after{ transform: scaleX(1) }
-    .sub{ color:var(--muted); margin-bottom:20px; font-size:1rem }
-
-    /* Chips */
-    .chips{ display:flex; gap:12px; flex-wrap:wrap }
-    .chip{ padding:10px 18px; border-radius:999px; background:var(--chip); color:var(--txt); font-weight:500; font-size:.9rem; border:1px solid var(--line);
-      transition: all .4s var(--transition); backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(20px) scale(.9)
-    }
-    .chip.animated{ opacity:1; transform: translateY(0) scale(1) }
-    .chip:hover{ background: rgba(108,92,231,.2); transform: translateY(-5px) scale(1.05) translateZ(5px); box-shadow:0 5px 15px rgba(108,92,231,.3) }
-
-    /* Projects Grid */
-    .projects{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:24px }
-    .project{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition: all .6s var(--transition);
-      position:relative; overflow:hidden; backdrop-filter: blur(5px); transform-style: preserve-3d; opacity:0; transform: translateY(30px) rotateY(15deg)
-    }
-    .project.animated{ opacity:1; transform: translateY(0) rotateY(0) }
-    .project:before{ content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background: linear-gradient(90deg, var(--brand), var(--brand2));
-      box-shadow:0 0 15px rgba(108,92,231,.7); transform: scaleX(0); transform-origin:left; transition: transform .8s var(--transition)
-    }
-    .project.animated:before{ transform: scaleX(1) }
-    .project:hover{ transform: translateY(-10px) rotateY(5deg) translateZ(10px); box-shadow: var(--glow) }
-    .project:hover:before{ transform: scaleX(1.1) }
-    .project h4{ font-size:1.3rem; margin-bottom:16px; transition: all .4s ease }
-    .project:hover h4{ color: var(--brand2) }
-    .project p{ color:var(--muted); margin-bottom:16px; font-size:1rem }
-    .tag{ display:inline-block; padding:8px 14px; border-radius:999px; font-weight:600; font-size:.85rem; background: rgba(0,206,201,.1);
-      color:var(--brand2); border:1px solid rgba(0,206,201,.3); transition: all .4s var(--transition); transform-style: preserve-3d; margin: 4px;
-    }
-    .tag:hover{ background: rgba(0,206,201,.2); transform: translateY(-3px) translateZ(5px); box-shadow:0 5px 10px rgba(0,206,201,.2) }
-
-    /* Split */
-    .split{ display:grid; grid-template-columns:1fr 1fr; gap:24px }
-    .split > *{ opacity:0; transform: translateY(30px); transition: all .8s var(--transition) }
-    .split > *.animated{ opacity:1; transform: translateY(0) }
-    .split > *:nth-child(1){ transition-delay:.2s } .split > *:nth-child(2){ transition-delay:.4s }
-
-    /* Form */
-    .form-group{ margin-bottom:20px; position:relative; transform-style: preserve-3d }
-    input, textarea{ width:100%; padding:14px 18px; border-radius:var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.05);
-      color:var(--txt); font-family:'Inter',sans-serif; font-size:1rem; transition: all .4s var(--transition); backdrop-filter: blur(5px); transform-style: preserve-3d
-    }
-    input:focus, textarea:focus{ outline:none; border-color: var(--brand2); box-shadow: 0 0 0 3px rgba(0,206,201,.2); background: rgba(255,255,255,.1); transform: translateY(-2px) translateZ(5px) }
-    textarea{ min-height:150px; resize: vertical }
-    input::placeholder, textarea::placeholder{ color: rgba(255,255,255,.5) }
-
-    /* Socials */
-    .socials{ display:flex; gap:16px; margin-top:30px }
-    .socials a{ display:flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:50%; background:var(--panel-2); color:var(--txt);
-      transition: all .4s var(--transition); transform-style: preserve-3d; box-shadow:0 4px 8px rgba(0,0,0,.2); opacity:0; transform: translateY(20px)
-    }
-    .socials a.animated{ opacity:1; transform: translateY(0) }
-    .socials a:nth-child(1){ transition-delay:.4s } .socials a:nth-child(2){ transition-delay:.5s }
-    .socials a:hover{ background: linear-gradient(45deg, var(--brand), var(--brand2)); color:#fff; transform: translateY(-5px) rotateY(15deg) translateZ(10px); box-shadow: var(--glow) }
-
-    /* Footer */
-    footer{ padding:60px 0; text-align:center; color:var(--muted); font-size:1rem; position:relative; opacity:0; transform: translateY(20px); transition: all .8s var(--transition) }
-    footer.animated{ opacity:1; transform: translateY(0) }
-    footer:before{ content:''; position:absolute; top:0; left:50%; transform: translateX(-50%); width:80%; height:1px;
-      background: linear-gradient(90deg, transparent, var(--brand2), transparent); transform-origin:center; transform: scaleX(0);
-      transition: transform .8s var(--transition) .3s
-    }
-    footer.animated:before{ transform: translateX(-50%) scaleX(1) }
-
-    @keyframes float{ 0%,100%{ transform: translateY(0) rotate(0)} 25%{ transform: translateY(-10px) rotate(3deg)} 50%{ transform: translateY(-20px) rotate(5deg)} 75%{ transform: translateY(-10px) rotate(-3deg)} }
-
-    .store-badge {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff6b6b, #feca57);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      margin-left: 10px;
-      color: white;
-    }
-
-    /* Responsive */
-    @media (max-width:1024px){ .hero .inner{ grid-template-columns:1fr; gap:40px } .split{ grid-template-columns:1fr } }
-    @media (max-width:768px){
-      h1{ font-size:2.8rem } h2{ font-size:2rem } 
-      .links{ display:none; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(15,12,41,.95); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,.3); transform: translateY(-20px); opacity: 0; transition: all .3s ease; z-index: 1000; }
-      .links.active{ transform: translateY(0); opacity: 1; display: flex; }
-      .menu-btn{ display:block; z-index: 101; }
-    }
-    @media (max-width:480px){ h1{ font-size:2.2rem } .btn{ width:100%; justify-content:center } .cta{ gap:12px } }
-    
-    /* Accessibility */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-  </style>
-</head>
-<body>
-  <!-- Particles -->
-  <div class="particles" id="particles" aria-hidden="true"></div>
-
-  <!-- NAV -->
-  <nav class="nav" role="navigation" aria-label="Primary">
-    <div class="wrap">
-      <div class="brand">
-        Blackbox Creations
-        <span class="store-badge"><i class="fas fa-store"></i> Asset Publisher</span>
-      </div>
-      <div class="links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#assets">Unity Assets</a>
-        <a href="#contact">Contact</a>
-        <a class="btn secondary" href="#" download><i class="fas fa-download"></i> CV</a>
-      </div>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-        <span class="sr-only">Menu</span>
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container inner">
-      <div>
-        <h1>Unity Developer <br><span style="font-size: 1.8rem;">& Asset Store Publisher</span></h1>
-        <p class="subtitle">6+ years of experience in Unity development, creating optimization tools, multiplayer solutions, and immersive XR experiences. Published 6+ high-quality assets on Unity Asset Store.</p>
-        <div class="cta">
-          <a class="btn primary" href="#assets"><i class="fas fa-cube"></i> View Assets</a>
-          <a class="btn ghost" href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-        </div>
-        <div class="socials" aria-label="Social links">
-          <a href="mailto:blackboxcreations@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://wa.me/923044145248" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-      <div class="card floating" aria-label="Highlights">
-        <h3><i class="fas fa-star" style="color: var(--brand2); margin-right: 8px;"></i> Highlights</h3>
-        <ul style="margin: 16px 0 0 20px">
-          <li>6+ Years Unity Development Experience</li>
-          <li>Published Asset Store Developer (6+ tools)</li>
-          <li>Specialized in Optimization & Multiplayer</li>
-          <li>XR Development on Meta Quest</li>
-          <li>Custom Unity Tools & Editor Extensions</li>
+        <p>Available for custom tool development, consulting, and full-scale Unity projects.</p>
+        <ul class="offer-list">
+          <li>Custom Unity editor tools</li>
+          <li>Asset Store publishing consultation</li>
+          <li>VR / XR development</li>
+          <li>Multiplayer systems</li>
+          <li>Performance optimization</li>
         </ul>
+        <div class="contact-row" style="margin-top:26px">
+          <a href="mailto:blackboxcreations@gmail.com"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>blackboxcreations@gmail.com</a>
+        </div>
+        <div class="contact-row" style="margin-top:8px">
+          <a href="https://wa.me/923190779578" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 20l1.4-4A8 8 0 1112 20a8 8 0 01-4-1.1z"/></svg>+92 319 0779578</a>
+        </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main class="container">
-    <!-- ABOUT -->
-    <section id="about" aria-labelledby="about-title">
-      <h2 id="about-title">About Blackbox Creations</h2>
-      <div class="card">
-        <p>Blackbox Creations is a Unity development studio with over 6 years of experience in game development, XR applications, and tool creation. As an Asset Store publisher, we've helped thousands of developers optimize their games with our tools. We specialize in creating efficient, well-documented Unity assets that solve real development challenges.</p>
-        <br>
-        <p><strong>What we do:</strong></p>
-        <ul style="margin-left: 20px; margin-top: 10px;">
-          <li>Create high-quality Unity assets for optimization and networking</li>
-          <li>Develop VR/XR experiences for Meta Quest and other platforms</li>
-          <li>Build multiplayer systems using Photon and Netcode</li>
-          <li>Provide technical consulting and custom tool development</li>
-        </ul>
-        <p class="sub" style="margin-top: 20px;"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Lahore, Pakistan · <i class="fas fa-briefcase"></i> <strong>Open to:</strong> Remote / Contract / Full-time</p>
-      </div>
-    </section>
+</main>
 
-    <!-- SKILLS -->
-    <section id="skills" aria-labelledby="skills-title">
-      <h2 id="skills-title">Skills & Expertise</h2>
-      <div class="card">
-        <div class="chips">
-          <span class="chip"><i class="fas fa-gamepad"></i> Unity</span>
-          <span class="chip"><i class="fas fa-code"></i> C#</span>
-          <span class="chip"><i class="fas fa-tools"></i> Editor Tools</span>
-          <span class="chip"><i class="fas fa-chart-line"></i> Optimization</span>
-          <span class="chip"><i class="fas fa-cubes"></i> Mesh Combining</span>
-          <span class="chip"><i class="fas fa-magic"></i> LOD Generation</span>
-          <span class="chip"><i class="fas fa-vr-cardboard"></i> VR / XR</span>
-          <span class="chip"><i class="fab fa-meta"></i> Meta Quest</span>
-          <span class="chip"><i class="fas fa-network-wired"></i> Multiplayer</span>
-          <span class="chip"><i class="fas fa-signal"></i> Photon</span>
-          <span class="chip"><i class="fas fa-code-branch"></i> Netcode</span>
-          <span class="chip"><i class="fas fa-broadcast-tower"></i> UDP Networking</span>
-          <span class="chip"><i class="fas fa-mobile-alt"></i> Cross-platform</span>
-          <span class="chip"><i class="fas fa-atom"></i> Physics Systems</span>
-        </div>
-      </div>
-    </section>
+<footer class="wrap">
+  <span>© <span id="year"></span> Blackbox Creations · Unity Developer &amp; Asset Store Publisher</span>
+  <span>Lahore, Pakistan</span>
+</footer>
 
-    <!-- UNITY ASSETS -->
-    <section id="assets">
-      <h2>Unity Asset Store Products</h2>
-      <div class="projects">
-        <div class="project">
-          <h4><a href="https://assetstore.unity.com/packages/slug/373210" target="_blank">Mesh Polygon Optimizer</a></h4>
-          <p>Auto LOD Generator & Mesh Combiner - Automatically optimize your meshes with intelligent LOD generation and mesh combining algorithms.</p>
-          <span class="tag">Optimization</span>
-          <span class="tag">LOD</span>
-          <span class="tag">Mesh Combining</span>
-        </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Blackbox Creations",
+  "jobTitle": "Unity Developer & Asset Store Publisher",
+  "knowsAbout": ["Unity", "C#", "Asset Store", "VR", "XR", "Optimization", "Multiplayer", "UDP Networking", "Mesh Optimization", "LOD Generation"]
+}
+</script>
 
-        <div class="project">
-          <h4><a href="https://assetstore.unity.com/packages/slug/374654" target="_blank">One-Click LOD Suite</a></h4>
-          <p>Batch LOD Generator & Optimizer - Generate LODs for multiple meshes with one click. Perfect for large projects needing performance optimization.</p>
-          <span class="tag">Batch Processing</span>
-          <span class="tag">LOD</span>
-          <span class="tag">Performance</span>
-        </div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-        <div class="project">
-          <h4><a href="https://assetstore.unity.com/packages/slug/374896" target="_blank">MeshWeld Pro</a></h4>
-          <p>Mesh Combiner & Texture Atlas - Combine multiple meshes into one and generate texture atlases automatically to reduce draw calls.</p>
-          <span class="tag">Mesh Combining</span>
-          <span class="tag">Texture Atlas</span>
-          <span class="tag">Optimization</span>
-        </div>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
 
-        <div class="project">
-          <h4><a href="https://assetstore.unity.com/packages/slug/374934" target="_blank">One Click Mesh Optimizer</a></h4>
-          <p>Reduce Tris & Vertices - Instantly reduce polygon count while preserving visual quality. Ideal for mobile and VR optimization.</p>
-          <span class="tag">Decimation</span>
-          <span class="tag">Polygon Reduction</span>
-          <span class="tag">Mobile Ready</span>
-        </div>
-
-        <div class="project">
-          <h4><a href="https://assetstore.unity.com/packages/slug/371126" target="_blank">Smart Distributor</a></h4>
-          <p>Object Placement Tool for Unity - Intelligently place objects on surfaces with advanced randomization and positioning controls.</p>
-          <span class="tag">Level Design</span>
-          <span class="tag">Procedural</span>
-          <span class="tag">Placement Tool</span>
-        </div>
-
-        <div class="project">
-          <h4><a href="https://assetstore.unity.com/packages/slug/370348" target="_blank">UDP Networking Pro</a></h4>
-          <p>Auto Device Discovery, LAN, Messaging & VR/PC/Mobile - Complete UDP networking solution with automatic device discovery and cross-platform support.</p>
-          <span class="tag">Networking</span>
-          <span class="tag">UDP</span>
-          <span class="tag">Cross-Platform</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Get In Touch</h2>
-      <div class="split">
-        <div class="card">
-          <form id="contactForm" aria-label="Contact form">
-            <div class="form-group">
-              <label for="name" class="sr-only">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-              <label for="email" class="sr-only">Email</label>
-              <input id="email" name="email" type="email" placeholder="Your email" required>
-            </div>
-            <div class="form-group">
-              <label for="message" class="sr-only">Message</label>
-              <textarea id="message" name="message" placeholder="Tell me about your project or asset needs..." required></textarea>
-            </div>
-            <button class="btn primary" type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-            <p id="formNote" class="sub" style="margin-top:10px"></p>
-          </form>
-        </div>
-        <div class="card">
-          <h3>Let's Work Together</h3>
-          <p class="sub">Available for custom tool development, consulting, and full-scale Unity projects.</p>
-          <ul style="margin-left:20px; margin-top:10px">
-            <li>Custom Unity Editor Tools</li>
-            <li>Asset Store Publishing Consultation</li>
-            <li>VR/XR Development</li>
-            <li>Multiplayer Systems</li>
-            <li>Performance Optimization</li>
-          </ul>
-          <div class="socials" style="margin-top:20px">
-            <a href="mailto:supportblackboxcreation@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://wa.me/923190779578" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="footer">
-    © <span id="year"></span> Blackbox Creations · Unity Developer & Asset Store Publisher · 6+ Years Experience
-  </footer>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Blackbox Creations",
-    "jobTitle": "Unity Developer & Asset Store Publisher",
-    "url": "https://your-domain.com",
-    "knowsAbout": ["Unity", "C#", "Asset Store", "VR", "XR", "Optimization", "Multiplayer", "UDP Networking", "Mesh Optimization", "LOD Generation"]
-  }
-  </script>
-
-  <script>
-    // Helpers
-    const qs = (s, root=document) => root.querySelector(s);
-    const qsa = (s, root=document) => [...root.querySelectorAll(s)];
-
-    // Mobile menu
-    const navLinks = qs('#navLinks');
-    const menuBtn = qs('#menuBtn');
-    
-    function toggleMenu() {
-      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', !isExpanded);
-      navLinks.classList.toggle('active');
-      
-      qsa('#navLinks a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-          menuBtn.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-    
-    if (menuBtn) {
-      menuBtn.addEventListener('click', toggleMenu);
-    }
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (navLinks && !navLinks.contains(e.target) && menuBtn && !menuBtn.contains(e.target)) {
-        navLinks.classList.remove('active');
-        if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
-      }
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const mail = 'blackboxcreations@gmail.com';
+      const subject = encodeURIComponent('Project inquiry from portfolio');
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from Blackbox Creations portfolio`);
+      window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
+      document.getElementById('formNote').textContent = 'Opening your email app… if nothing happens, email ' + mail + ' directly.';
     });
-
-    // Particles
-    (function makeParticles(){
-      const wrap = qs('#particles');
-      if (!wrap) return;
-      const COUNT = Math.min(60, Math.floor((window.innerWidth * window.innerHeight) / 30000));
-      for(let i=0;i<COUNT;i++){
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random()*12 + 6;
-        p.style.width = p.style.height = size + 'px';
-        p.style.left = Math.random()*100 + '%';
-        p.style.top = Math.random()*100 + '%';
-        p.style.animationDuration = (12 + Math.random()*10) + 's';
-        p.style.animationDelay = (-Math.random()*15) + 's';
-        p.style.filter = `blur(${(Math.random()*2).toFixed(1)}px)`;
-        wrap.appendChild(p);
-        requestAnimationFrame(()=> p.style.opacity = 1);
-      }
-    })();
-
-    // Intersection Observer for animations
-    const animateOnView = (selector) => {
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(ent=>{
-          if(ent.isIntersecting){
-            ent.target.classList.add('animated');
-            io.unobserve(ent.target);
-          }
-        });
-      }, {threshold: .15});
-      qsa(selector).forEach(el=> io.observe(el));
-    };
-    animateOnView('h2, .card, .chip, .project, .split > *, .socials a, footer');
-
-    // Stagger chips
-    qsa('.chips .chip').forEach((c,i)=> c.style.transitionDelay = (0.05*i)+'s');
-
-    // Simple 3D tilt
-    function addTilt(el, intensity=10){
-      let rAF;
-      const rect = ()=> el.getBoundingClientRect();
-      function onMove(e){
-        cancelAnimationFrame(rAF);
-        rAF = requestAnimationFrame(()=>{
-          const b = rect();
-          const px = (e.clientX - b.left) / b.width - .5;
-          const py = (e.clientY - b.top) / b.height - .5;
-          el.style.transform = `rotateX(${(-py*intensity).toFixed(2)}deg) rotateY(${(px*intensity).toFixed(2)}deg) translateZ(10px)`;
-        });
-      }
-      function reset(){ el.style.transform = ''; }
-      el.addEventListener('mousemove', onMove);
-      el.addEventListener('mouseleave', reset);
-    }
-    qsa('.card, .project').forEach(el=> addTilt(el, 6));
-
-    // Contact form: open mailto with prefilled body
-    const contactForm = qs('#contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const name = qs('#name').value.trim();
-        const email = qs('#email').value.trim();
-        const message = qs('#message').value.trim();
-        const mail = 'blackboxcreations@gmail.com';
-        const subject = encodeURIComponent('Project Inquiry from Portfolio');
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from Blackbox Creations portfolio`
-        );
-        window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
-        const note = qs('#formNote');
-        note.textContent = 'Opening your email app… If nothing happens, email us directly at ' + mail;
-      });
-    }
-
-    // Year
-    const yearSpan = qs('#year');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-  </script>
+  }
+</script>
 </body>
 </html>
